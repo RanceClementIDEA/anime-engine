@@ -1,0 +1,193 @@
+{
+  "series_title": "Méridien Zéro",
+  "genre": "horlo-punk dark fantasy",
+  "aspect_ratio": "16:9",
+  "characters": [
+    {
+      "id": "kaen",
+      "name": "Kaen Vael",
+      "role": "protagonist",
+      "voice_profile": "young_male_determined_fr",
+      "visual_prompt": "17-year-old boy, messy dark hair, sharp grey eyes, charcoal scavenger jacket, bandaged right forearm, thin glowing amber scar on left collarbone",
+      "expressions": [
+        "neutral",
+        "angry",
+        "shocked",
+        "sad",
+        "determined"
+      ],
+      "accent_color_hex": "#f59e0b"
+    },
+    {
+      "id": "mina",
+      "name": "Mina Tsubaki",
+      "role": "ally",
+      "voice_profile": "young_female_energetic_fr",
+      "visual_prompt": "16-year-old girl, short copper hair, aviator goggles on forehead, crimson scarf, agile utility vest, brass ampoule straps on wrist",
+      "expressions": [
+        "neutral",
+        "happy",
+        "shocked",
+        "sad",
+        "determined",
+        "angry"
+      ],
+      "accent_color_hex": "#ef4444"
+    },
+    {
+      "id": "bram",
+      "name": "Bram Orlov",
+      "role": "mentor",
+      "voice_profile": "older_male_gruff_fr",
+      "visual_prompt": "55-year-old watchmaker, weathered face, grey beard, mechanical brass clockwork eyepatch, heavy leather apron",
+      "expressions": [
+        "neutral",
+        "tired",
+        "sad",
+        "angry",
+        "smirk"
+      ],
+      "accent_color_hex": "#b45309"
+    },
+    {
+      "id": "lyra",
+      "name": "Lyra Vance",
+      "role": "antagonist_rival",
+      "voice_profile": "female_cold_authoritative_fr",
+      "visual_prompt": "24-year-old Inquisitor, sleek silver-white hair, piercing steel-blue eyes, crisp white and crimson Concordat uniform, long white cape, silver rapier",
+      "expressions": [
+        "cold",
+        "neutral",
+        "angry",
+        "doubt"
+      ],
+      "accent_color_hex": "#94a3b8"
+    },
+    {
+      "id": "sorai",
+      "name": "Soraï Kestrel",
+      "role": "deuteragonist",
+      "voice_profile": "female_calm_analytical_fr",
+      "visual_prompt": "21-year-old former archivist, dark navy bob haircut, slim brass glasses, ivory tailored coat with leather satchel of amber vials",
+      "expressions": [
+        "neutral",
+        "serious",
+        "sad",
+        "smirk"
+      ],
+      "accent_color_hex": "#38bdf8"
+    },
+    {
+      "id": "nora",
+      "name": "Nora Vael",
+      "role": "key_mystery",
+      "voice_profile": "young_female_ethereal_fr",
+      "visual_prompt": "15-year-old girl, long dark hair, luminous pale gold eyes, flowing alabaster white dress bathed in warm golden backlight",
+      "expressions": [
+        "sad",
+        "serene",
+        "neutral"
+      ],
+      "accent_color_hex": "#fde68a"
+    },
+    {
+      "id": "cassian",
+      "name": "Cassian Morel",
+      "role": "season1_antagonist",
+      "voice_profile": "male_calm_calculating_fr",
+      "visual_prompt": "42-year-old Harvest Bureau Director, immaculate black and bronze tailcoat, white gloves, antique brass pocket chronometer, weary calculating eyes",
+      "expressions": [
+        "cold",
+        "neutral",
+        "smirk"
+      ],
+      "accent_color_hex": "#78350f"
+    }
+  ],
+  "master_locations": [
+    {
+      "id": "opaline_ashes",
+      "name": "Ruines d'Opaline (Terrasse 7)",
+      "lighting_variants": [
+        "sunset",
+        "day",
+        "night"
+      ],
+      "background_prompt": "bleached white abandoned village ruins, shattered stone clocktower, suspended raindrops in golden dusk haze, silent white fog"
+    },
+    {
+      "id": "lisere_morte_ruins",
+      "name": "Lisière Morte (Terrasse 7)",
+      "lighting_variants": [
+        "day",
+        "sunset"
+      ],
+      "background_prompt": "crumbling pre-arrest stone arches overhanging infinite white fog abyss of The Zero, rusted iron cargo lift, distant monumental golden ring in sky"
+    },
+    {
+      "id": "gris_val_market",
+      "name": "Gris-Val (Terrasse 6)",
+      "lighting_variants": [
+        "day",
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "vertical industrial horlo-punk slum alleys, rusted iron balconies, steaming copper pipes, warm amber hanging lanterns, wet cobblestones"
+    },
+    {
+      "id": "bram_workshop",
+      "name": "Atelier d'Horlogerie de Bram",
+      "lighting_variants": [
+        "day",
+        "night"
+      ],
+      "background_prompt": "cluttered warm watchmaker workshop, walls covered in brass pendulums and clock dials, glowing amber vials, wooden workbench under tungsten lamp"
+    },
+    {
+      "id": "terrasse5_rail_tunnels",
+      "name": "Tunnels Ferroviaires à Balanciers (Terrasse 5)",
+      "lighting_variants": [
+        "night"
+      ],
+      "background_prompt": "colossal subterranean railway tunnels, giant swinging brass pendulum counterweights, damp steel tracks, flickering amber signal lamps"
+    },
+    {
+      "id": "terrasse3_harvest_tower",
+      "name": "Tour du Bureau de la Récolte (Terrasse 3)",
+      "lighting_variants": [
+        "day",
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "monumental dark marble and bronze office behind giant clock-face stained glass windows overlooking the lower terraces"
+    },
+    {
+      "id": "terrasse2_archives",
+      "name": "Archives du Cercle d'Ivoire (Terrasse 2)",
+      "lighting_variants": [
+        "day",
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "soaring ivory stone archive hall, endless brass-railed bookshelves, floating amber dust motes in shafts of light"
+    },
+    {
+      "id": "terrasse1_ring_core",
+      "name": "Sanctuaire de l'Anneau Fixe (Terrasse 1)",
+      "lighting_variants": [
+        "day"
+      ],
+      "background_prompt": "ethereal alabaster sanctuary at the summit of the world directly beneath the colossal glowing golden Fixed Ring"
+    }
+  ],
+  "recurring_props": [
+    "Ampoule d'Ambre Gris",
+    "Ampoule d'Ambre Noir (OPALINE-00)",
+    "Carnet de cuir de Bram",
+    "Chronomètre de poche bloqué à 23h48"
+  ],
+  "audio_identity": {
+    "style": "dark orchestral cello, ticking clockwork percussion, atmospheric synth",
+    "dialogue_lang": "fr"
+  }
+}

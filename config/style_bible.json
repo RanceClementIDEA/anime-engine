@@ -1,0 +1,55 @@
+{
+  "meta": {
+    "style_name": "dark horlo-punk cel-shaded anime",
+    "generated_at": "2026-11-24T16:00:00+00:00",
+    "total_images_indexed": 0,
+    "categories_count": {}
+  },
+  "visual_dna": {
+    "dominant_aspect_ratio": 1.78,
+    "dominant_palette_hex": [
+      "#0f172a",
+      "#1e293b",
+      "#f59e0b",
+      "#d97706",
+      "#e2e8f0",
+      "#991b1b"
+    ],
+    "metrics": {
+      "mean_luma": 0.34,
+      "mean_contrast": 0.27,
+      "mean_saturation": 0.38
+    },
+    "lighting_profile": "dark_moody, high_contrast_hard_cel, muted_cinematic",
+    "top_artists": [],
+    "top_series": []
+  },
+  "tag_vocabulary": {
+    "global_top_tags": [
+      "cel_shading",
+      "dramatic_lighting",
+      "clockwork",
+      "amber_glow",
+      "cinematic_composition"
+    ],
+    "by_category": {}
+  },
+  "prompt_templates": {
+    "positive_prefix": "japanese anime style, dark horlo-punk cel-shaded anime, dark_moody, high_contrast_hard_cel, muted_cinematic, clean lineart, flat cel shading, dramatic amber rim lighting",
+    "negative_prompt": "3d render, photorealistic, plastic skin, blurry, watermark, text, speech bubble, bad anatomy, deformed hands, extra limbs"
+  },
+  "animation_rules": {
+    "target_fps": 12,
+    "delivery_fps": 24,
+    "budget_split": {
+      "local_free_ratio": 0.85,
+      "i2v_hero_ratio": 0.15
+    },
+    "post_fx": {
+      "bloom_opacity": 0.22,
+      "film_grain_strength": 6,
+      "use_impact_frames_on_hits": true
+    }
+  },
+  "claude_vision_reference_pack": {}
+}
