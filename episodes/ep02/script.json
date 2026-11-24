@@ -1,0 +1,400 @@
+{
+  "episode_id": "ep02",
+  "episode_title": "Épisode 2 — L'Archiviste Déserteuse",
+  "max_budget_usd": 15.5,
+  "max_i2v_ratio": 0.15,
+  "scenes": [
+    {
+      "scene_id": "SC01",
+      "act": "cold_open",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Suite directe de l'Épisode 1 : Lyra Vance attaque Kaen avec ses lames d'air figé (Inertie offensive). Au moment du coup fatal, une barrière géométrique transparente s'interpose : Soraï Kestrel extrait Kaen par un conduit.",
+      "dialogue_lines": [
+        {
+          "line_id": "L001",
+          "character_id": "lyra",
+          "emotion": "cold",
+          "text": "Dernier avertissement, récupérateur. Lâche cet éclat d'Ambre.",
+          "pause_after_sec": 0.4,
+          "action_note": "Lyra fend l'air de sa rapière ; une lame transparente d'air figé tranche le béton à deux centimètres de Kaen."
+        },
+        {
+          "line_id": "L002",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Essaie de venir le prendre !",
+          "pause_after_sec": 0.6,
+          "action_note": "Kaen recule en boitant tandis que deux nouvelles lames invisibles fondent sur lui. Un hexagone lumineux d'Inertie les bloque net."
+        },
+        {
+          "line_id": "L003",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Si tu veux rester en un seul morceau, cours. Maintenant.",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï Kestrel sort de la fumée, ajuste ses lunettes de laiton et tire Kaen vers une trappe de maintenance."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC02",
+      "act": "act_a",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": true,
+      "estimated_duration_sec": 100.0,
+      "summary": "Climax d'action (I2V sélectif) : fuite tactique dans les tunnels ferroviaires. Lyra tranche les poutrelles d'acier par Inertie ; Soraï fige une grille qui s'effondre pendant que Kaen fait exploser une conduite de vapeur par Rémanence.",
+      "dialogue_lines": [
+        {
+          "line_id": "L004",
+          "character_id": "lyra",
+          "emotion": "angry",
+          "text": "Soraï Kestrel… Tu as donc choisi la trahison jusqu'au bout !",
+          "pause_after_sec": 0.4,
+          "action_note": "Lyra bondit sur un balancier en mouvement et projette une salve de lames d'air figé."
+        },
+        {
+          "line_id": "L005",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Garde ton souffle, Kaen ! Frappe la valve à ta droite dans trois secondes !",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï plaque sa paume contre une grille métallique pour la maintenir en stase malgré l'impact."
+        },
+        {
+          "line_id": "L006",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Compris !",
+          "pause_after_sec": 0.6,
+          "action_note": "Impact frame N&B : l'écho de Rémanence de Kaen fait éclater la conduite de vapeur, aveuglant l'escouade de Lyra."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC03",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Arrivée dans une planque sur les toits de Gris-Val. Mina les retrouve, soulagée mais méfiante. Kaen braque sa barre de fer sur Soraï en voyant son manteau de la Terrasse 2.",
+      "dialogue_lines": [
+        {
+          "line_id": "L007",
+          "character_id": "mina",
+          "emotion": "shocked",
+          "text": "Kaen ! T'es complètement malade ! Et c'est qui cette bourgeoise de la Deuxième Terrasse ?",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina se place devant Kaen, prête à activer ses bracelets d'Ambre."
+        },
+        {
+          "line_id": "L008",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Parle. Pourquoi l'Inquisitrice connaissait ton nom ?",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen fixe Soraï, sa main toujours crispée sur l'éclat d'Ambre Noir."
+        },
+        {
+          "line_id": "L009",
+          "character_id": "sorai",
+          "emotion": "neutral",
+          "text": "Parce que j'étais archiviste au Cercle d'Ivoire jusqu'à la semaine dernière. Et parce que ce que tu tiens dans ta main ne devrait pas exister.",
+          "pause_after_sec": 0.8,
+          "action_note": "Soraï pose sa sacoche lentement sur la table pour montrer qu'elle n'est pas armée."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC04",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "day",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "L'aube se lève sur Gris-Val. Sur le rebord du toit, Kaen et Mina observent un phénomène étrange : une nuée d'oiseaux disparaît en plein ciel bleu dans un éclat doré (indice caché de l'Outre-Temps).",
+      "dialogue_lines": [
+        {
+          "line_id": "L010",
+          "character_id": "mina",
+          "emotion": "neutral",
+          "text": "Maren ne reconnaît toujours personne. Le vieux médecin du coin dit qu'il n'y a rien à faire.",
+          "pause_after_sec": 0.7,
+          "action_note": "Mina regarde les ruelles brumeuses en contrebas, le visage grave."
+        },
+        {
+          "line_id": "L011",
+          "character_id": "mina",
+          "emotion": "shocked",
+          "text": "Hé… regarde là-haut. Les oiseaux viennent de disparaître dans le ciel.",
+          "pause_after_sec": 0.9,
+          "action_note": "Plan large sur le ciel pâle : une nuée d'oiseaux s'évapore dans un flash doré silencieux en franchissant une limite invisible."
+        },
+        {
+          "line_id": "L012",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "Un mirage de l'Anneau… Peu importe ce qu'il y a là-haut. Je veux juste savoir où ils ont emmené ma sœur.",
+          "pause_after_sec": 0.6,
+          "action_note": "Kaen se détourne du ciel et rentre dans la planque."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC05",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "day",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 100.0,
+      "summary": "Soraï examine le fragment d'Ampoule noire gravé OPALINE-00 et révèle la falsification des archives officielles du Concordat concernant la destruction du village de Kaen.",
+      "dialogue_lines": [
+        {
+          "line_id": "L013",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Regarde la gravure sur le goulot : OPALINE-00. Dans nos registres, ton village a été rayé par une Marée Blanche naturelle il y a huit ans.",
+          "pause_after_sec": 0.5,
+          "action_note": "Gros plan sur l'éclat de verre noir-doré tenu à la pince par Soraï."
+        },
+        {
+          "line_id": "L014",
+          "character_id": "sorai",
+          "emotion": "sad",
+          "text": "Sauf que le préfixe zéro-zéro ne désigne jamais un accident. C'est le code d'une extraction prioritaire validée par le Bureau de la Récolte.",
+          "pause_after_sec": 0.6,
+          "action_note": "Soraï retire ses lunettes, marquée par la culpabilité."
+        },
+        {
+          "line_id": "L015",
+          "character_id": "kaen",
+          "emotion": "shocked",
+          "text": "Une extraction… Ils ont rasé tout le village pour la prendre ?",
+          "pause_after_sec": 0.8,
+          "action_note": "Le poing de Kaen tremble sur la table en bois."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC06",
+      "act": "act_a",
+      "location_id": "terrasse3_harvest_tower",
+      "lighting": "day",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Fin d'Acte A (Mini-Cliffhanger) : première apparition du Directeur Cassian Morel. Lyra lui remet son rapport sur l'Ambre Noir. Morel masque froidement la vérité et ordonne le bouclage total de la Terrasse 6.",
+      "dialogue_lines": [
+        {
+          "line_id": "L016",
+          "character_id": "lyra",
+          "emotion": "neutral",
+          "text": "Directeur Morel. Le fugitif a absorbé un Sédiment noir que je n'ai jamais vu dans nos arsenaux. De quoi s'agit-il ?",
+          "pause_after_sec": 0.6,
+          "action_note": "Lyra se tient droite devant les immenses vitraux en forme de cadran de la Tour de la Récolte."
+        },
+        {
+          "line_id": "L017",
+          "character_id": "cassian",
+          "emotion": "cold",
+          "text": "D'une relique instable volée par des terroristes, Inquisitrice. Rien qui ne doive inquiéter le public.",
+          "pause_after_sec": 0.5,
+          "action_note": "Cassian Morel referme calmement son chronomètre de poche sans quitter la fenêtre des yeux."
+        },
+        {
+          "line_id": "L018",
+          "character_id": "cassian",
+          "emotion": "neutral",
+          "text": "Verrouillez toutes les issues de la Sixième Terrasse. Mettez la tête de Kaen Vael à prix. Et ramenez-moi Soraï Kestrel vivante.",
+          "pause_after_sec": 0.9,
+          "action_note": "Gros plan sur le regard calculateur de Cassian. Cut sur l'Eyecatch."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC07",
+      "act": "act_b",
+      "location_id": "bram_workshop",
+      "lighting": "day",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Dans son atelier, Bram entend les haut-parleurs annoncer le bouclage de Gris-Val et l'avis de recherche visant Kaen. Il cache son vieux carnet et arme son fusil à Rémanence.",
+      "dialogue_lines": [
+        {
+          "line_id": "L019",
+          "character_id": null,
+          "emotion": "cold",
+          "text": "Avis d'urgence du Concordat : couvre-feu immédiat sur la Sixième Terrasse. Tout renseignement menant à Kaen Vael sera récompensé d'une exemption annuelle de la Dîme.",
+          "pause_after_sec": 0.7,
+          "action_note": "Voix métallique des haut-parleurs résonnant dans l'atelier silencieux."
+        },
+        {
+          "line_id": "L020",
+          "character_id": "bram",
+          "emotion": "tired",
+          "text": "Une exemption d'un an… Ils veulent que tout le quartier lui saute à la gorge.",
+          "pause_after_sec": 0.6,
+          "action_note": "Bram glisse son carnet usé dans une trappe secrète et charge une Ampoule d'Ambre dans son fusil."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC08",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "sunset",
+      "bgm_mood": "emotion",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Dans la planque, Kaen est pris d'un vertige brûlant. Soraï inspecte ses yeux et l'avertit que l'Ambre Noir accélère la Loi d'Érosion : s'il perd le contrôle, il deviendra un Blanc.",
+      "dialogue_lines": [
+        {
+          "line_id": "L021",
+          "character_id": "kaen",
+          "emotion": "sad",
+          "text": "Ma cicatrice… j'ai l'impression d'entendre des voix qui ne sont pas les miennes.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen s'appuie contre le mur ; un très léger voile blanc tremble au bord de son iris."
+        },
+        {
+          "line_id": "L022",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "C'est l'Érosion. Tu as absorbé du Sédiment brut sans filtre. Un Séquencier ordinaire serait déjà mort ou vidé.",
+          "pause_after_sec": 0.4,
+          "action_note": "Soraï pose deux doigts sur la tempe de Kaen pour stabiliser le flux par Inertie chirurgicale."
+        },
+        {
+          "line_id": "L023",
+          "character_id": "sorai",
+          "emotion": "neutral",
+          "text": "Tu es une anomalie, Kaen. Mais si tu recommences à te battre à l'instinct, tu finiras par brûler jusqu'au souvenir de ta propre sœur.",
+          "pause_after_sec": 0.8,
+          "action_note": "Gros plan sur les yeux dilatés de Kaen : sa peur la plus profonde vient d'être nommée."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC09",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "sunset",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Soraï explique pourquoi elle a déserté : elle a optimisé les cliniques de la Dîme avant de découvrir le mensonge d'Opaline. Elle propose un pacte à Kaen pour remonter jusqu'au Bureau de la Récolte.",
+      "dialogue_lines": [
+        {
+          "line_id": "L024",
+          "character_id": "sorai",
+          "emotion": "sad",
+          "text": "J'ai conçu les algorithmes de rendement des Cliniques de la Dîme. Je croyais sauver la cité. Puis j'ai ouvert le dossier Opaline.",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï baisse les yeux vers ses mains."
+        },
+        {
+          "line_id": "L025",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Si tu veux retrouver Nora, tu as besoin de mes accès et de ma maîtrise de la Suture. Et moi, j'ai besoin de quelqu'un que leur système ne peut pas effacer.",
+          "pause_after_sec": 0.6,
+          "action_note": "Soraï tend la main vers Kaen."
+        },
+        {
+          "line_id": "L026",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Un seul mensonge, et je te laisse aux Inquisiteurs. Marché conclu.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen serre la main de Soraï."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC10",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 85.0,
+      "summary": "La nuit tombe. Les projecteurs des patrouilles balaient Gris-Val. Mina revient en courant : tous les monte-charges et escaliers vers la Terrasse 5 sont bouclés par l'Inquisition.",
+      "dialogue_lines": [
+        {
+          "line_id": "L027",
+          "character_id": "mina",
+          "emotion": "shocked",
+          "text": "Mauvaise nouvelle ! Ils ont coupé les monte-charges et posé des grilles d'Inertie sur tous les accès vers la Cinquième !",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina reprend son souffle près de la lucarne tandis qu'un faisceau de projecteur balaye le toit."
+        },
+        {
+          "line_id": "L028",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Lyra ne cherche pas à nous chasser. Elle referme la cage. Il faut d'abord prévenir votre horloger avant qu'ils ne fouillent son atelier.",
+          "pause_after_sec": 0.6,
+          "action_note": "Kaen et Mina échangent un regard inquiet en pensant à Bram."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC11",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 85.0,
+      "summary": "Cliffhanger de fin d'Épisode 2 : Lyra Vance surplombe Gris-Val bouclée et déploie les sirènes. Dans la ruelle, Kaen jure qu'ils ne fuiront pas vers le bas, mais qu'ils monteront jusqu'au sommet.",
+      "dialogue_lines": [
+        {
+          "line_id": "L029",
+          "character_id": "lyra",
+          "emotion": "cold",
+          "text": "Fouillez chaque atelier, chaque sous-sol. Personne ne quitte la Sixième Terrasse cette nuit.",
+          "pause_after_sec": 0.7,
+          "action_note": "Contre-plongée sur Lyra Vance sur la passerelle d'acier, sa cape blanche claquant dans le vent nocturne."
+        },
+        {
+          "line_id": "L030",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Ils nous croient coincés en bas. Alors on va leur apprendre à regarder vers le ciel. On passe chez Bram, et on monte.",
+          "pause_after_sec": 1.0,
+          "action_note": "Plan large sur Kaen, Soraï et Mina courant sur les toits de Gris-Val sous l'Anneau Fixe. Cut au noir."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC12",
+      "act": "preview",
+      "location_id": "bram_workshop",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 20.0,
+      "summary": "Teaser Épisode 3 : entraînement nocturne sur les toits, découverte des règles de la Suture et assaut des Effaceurs sur l'atelier de Bram.",
+      "dialogue_lines": [
+        {
+          "line_id": "L031",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Chaque Suture a un prix, et le nôtre se paie en souvenirs. Prochain épisode : Le Poids du Sédiment.",
+          "pause_after_sec": 0.5,
+          "action_note": "Montage rapide de 4 plans : entraînement de Kaen et Mina, puis ombre des Effaceurs devant la porte de Bram."
+        }
+      ]
+    }
+  ]
+}

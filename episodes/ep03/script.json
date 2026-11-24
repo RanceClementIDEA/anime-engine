@@ -1,0 +1,440 @@
+{
+  "episode_id": "ep03",
+  "episode_title": "Épisode 3 — Le Poids du Sédiment",
+  "max_budget_usd": 15.5,
+  "max_i2v_ratio": 0.15,
+  "scenes": [
+    {
+      "scene_id": "SC01",
+      "act": "cold_open",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Kaen, Soraï et Mina tentent de rejoindre l'atelier de Bram par les toits, mais l'Inquisition verrouille sa rue. Ils se replient dans un vieux beffroi abandonné tandis que la cicatrice de Kaen s'embrase douloureusement.",
+      "dialogue_lines": [
+        {
+          "line_id": "L001",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Putain, ils bloquent déjà la rue de l'atelier ! On ne peut pas le laisser seul !",
+          "pause_after_sec": 0.4,
+          "action_note": "Kaen s'accroupit derrière une cheminée de fer tandis que les projecteurs de l'Inquisition balaient la rue de Bram."
+        },
+        {
+          "line_id": "L002",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Regarde ta main, Kaen. Tu trembles. Si tu descends dans cet état, tu te fais abattre avant d'atteindre sa porte.",
+          "pause_after_sec": 0.5,
+          "action_note": "Gros plan sur la cicatrice d'ambre de Kaen qui pulse de manière irrégulière sous son col."
+        },
+        {
+          "line_id": "L003",
+          "character_id": "mina",
+          "emotion": "determined",
+          "text": "Elle a raison. Bram sait se défendre. On se planque au vieux beffroi jusqu'à la relève des patrouilles.",
+          "pause_after_sec": 0.7,
+          "action_note": "Mina entraîne Kaen vers la tour d'horloge rouillée surplombant Gris-Val."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC02",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Dans le beffroi abandonné, Soraï enseigne à Kaen les quatre disciplines de la Suture (Inertie, Rémanence, Usure, Greffe) et lui explique pourquoi le résidu d'Ambre Noir menace de dévorer sa mémoire.",
+      "dialogue_lines": [
+        {
+          "line_id": "L004",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Écoute bien. Toute Suture obéit à une seule loi : rien ne se crée, tout se brûle. L'Inertie fige, la Rémanence rejoue, l'Usure vieillit.",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï trace trois symboles géométriques à la craie sur le plancher poussiéreux à la lueur d'une lanterne d'ambre."
+        },
+        {
+          "line_id": "L005",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "Et la quatrième ? Celle dont personne n'ose parler dans les faubourgs ?",
+          "pause_after_sec": 0.4,
+          "action_note": "Kaen fixe la sacoche d'ampoules de Soraï."
+        },
+        {
+          "line_id": "L006",
+          "character_id": "sorai",
+          "emotion": "neutral",
+          "text": "La Greffe. Implanter le souvenir d'un mort dans son propre corps. Un art interdit qui finit toujours par effacer l'hôte.",
+          "pause_after_sec": 0.6,
+          "action_note": "Plan serré sur les lunettes de laiton de Soraï reflétant la flamme ambrée."
+        },
+        {
+          "line_id": "L007",
+          "character_id": "sorai",
+          "emotion": "sad",
+          "text": "Normalement, on brûle des Ampoules pour protéger son esprit. Mais toi, tu as ouvert la vanne à mains nues. Sans contrôle, la Loi d'Érosion va te vider.",
+          "pause_after_sec": 0.8,
+          "action_note": "Silence lourd dans le beffroi ; au loin, le vent siffle dans les câbles."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC03",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "day",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "À l'aube, premier essai pratique : Kaen tente de canaliser une Rémanence via une Ampoule standard mais dérape et brûle un micro-souvenir personnel, découvrant la terreur concrète de l'oubli.",
+      "dialogue_lines": [
+        {
+          "line_id": "L008",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Arrête la théorie. Donne-moi une ampoule, je vais la dompter tout de suite.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen frappe un pilier de bois ; un écho doré violent éclate trop tôt et pulvérise la poutre en éclats."
+        },
+        {
+          "line_id": "L009",
+          "character_id": "kaen",
+          "emotion": "shocked",
+          "text": "Attends… Le pont de pierre près de chez moi, à Opaline… Comment il s'appelait déjà ?",
+          "pause_after_sec": 0.8,
+          "action_note": "Kaen porte sa main à sa tempe, paniqué ; un voile blanc fugace traverse son œil droit."
+        },
+        {
+          "line_id": "L010",
+          "character_id": "mina",
+          "emotion": "shocked",
+          "text": "Kaen ! Ton œil droit vient de blanchir pendant une seconde !",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina bondit vers lui et lui saisit les épaules."
+        },
+        {
+          "line_id": "L011",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Tu as forcé le débit. Le Sédiment est passé par ta propre mémoire au lieu du verre. Et ce nom ne reviendra jamais.",
+          "pause_after_sec": 0.7,
+          "action_note": "Kaen serre les dents, glacé par la réalité de ce qu'il vient de perdre."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC04",
+      "act": "act_a",
+      "location_id": "bram_workshop",
+      "lighting": "day",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Dans l'atelier de Bram, l'Inquisitrice Lyra Vance mène une perquisition glaciale. Bram joue habilement le vieil amnésique bougon tout en dissimulant son carnet sous l'établi.",
+      "dialogue_lines": [
+        {
+          "line_id": "L012",
+          "character_id": "lyra",
+          "emotion": "cold",
+          "text": "Bram Orlov. Tes registres prouvent que Kaen Vael vend ses pièces ici chaque semaine. Où se cache-t-il ?",
+          "pause_after_sec": 0.5,
+          "action_note": "Lyra fait glisser le bout ganté de ses doigts sur l'établi couvert d'engrenages."
+        },
+        {
+          "line_id": "L013",
+          "character_id": "bram",
+          "emotion": "tired",
+          "text": "Kaen ? Le grand maigre aux cheveux noirs ? Désolé, Inquisitrice, j'ai presque tout brûlé à la guerre. Si ce n'est pas écrit sur mon reçu, je l'oublie.",
+          "pause_after_sec": 0.6,
+          "action_note": "Bram tapote son cache-œil en laiton d'un air las, sa main gauche calant discrètement la trappe de son carnet."
+        },
+        {
+          "line_id": "L014",
+          "character_id": "lyra",
+          "emotion": "doubt",
+          "text": "Tu as déjà vu une Ampoule d'Ambre Noir passer dans cet atelier, horloger ?",
+          "pause_after_sec": 0.7,
+          "action_note": "Lyra fixe l'œil valide de Bram ; un léger doute perce sous sa froideur militaire."
+        },
+        {
+          "line_id": "L015",
+          "character_id": "bram",
+          "emotion": "smirk",
+          "text": "De l'Ambre noir ? Ça, c'est des histoires pour faire peur aux gamins de la Sixième. Mais si vous en cherchez, demandez plutôt au Bureau de la Récolte.",
+          "pause_after_sec": 0.8,
+          "action_note": "Le regard de Lyra se fige une fraction de seconde avant qu'elle ne tourne les talons."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC05",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "day",
+      "bgm_mood": "daily",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Refusant de voir Kaen s'effondrer, Mina l'emmène sur les toits brumeux de Gris-Val pour lui apprendre à écouter le rythme de la Rémanence plutôt que de forcer le Sédiment.",
+      "dialogue_lines": [
+        {
+          "line_id": "L016",
+          "character_id": "mina",
+          "emotion": "determined",
+          "text": "Debout ! Tu ne vas pas rester prostré dans ce grenier. Si tu ne sais pas doser la Rémanence, c'est moi qui vais te l'apprendre.",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina ajuste ses lunettes d'aviateur sur son front et saute sur une poutrelle rouillée."
+        },
+        {
+          "line_id": "L017",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Tu as vu ce qui vient d'arriver ! Si je me rate encore une fois, qu'est-ce qui va disparaître ? Le visage de Nora ?",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen hésite sur le rebord, le vent agitant sa veste charcoal."
+        },
+        {
+          "line_id": "L018",
+          "character_id": "mina",
+          "emotion": "happy",
+          "text": "Arrête de pousser comme un bœuf et écoute le décalage ! La Rémanence, c'est pas de la force, c'est une danse sur un battement de deux secondes. Suis mes pas !",
+          "pause_after_sec": 0.6,
+          "action_note": "Mina s'élance entre deux balcons, laissant derrière elle une silhouette dorée parfaitement nette."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC06",
+      "act": "act_a",
+      "location_id": "terrasse3_harvest_tower",
+      "lighting": "sunset",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 85.0,
+      "summary": "Fin d'Acte A (Mini-Cliffhanger) : au sommet de la Tour de la Récolte, Cassian Morel constate que Lyra pose trop de questions et ordonne en secret aux Effaceurs de frapper l'atelier de Bram dès la nuit tombée.",
+      "dialogue_lines": [
+        {
+          "line_id": "L019",
+          "character_id": null,
+          "emotion": "cold",
+          "text": "Directeur. L'Inquisitrice Vance vient d'interroger l'horloger de la Sixième Terrasse. Elle a mentionné l'Ambre Noir.",
+          "pause_after_sec": 0.5,
+          "action_note": "Le commandant masqué des Effaceurs s'incline dans l'ombre des vitraux orangés."
+        },
+        {
+          "line_id": "L020",
+          "character_id": "cassian",
+          "emotion": "cold",
+          "text": "Lyra est trop consciencieuse pour son propre bien. Si elle relie le matricule Opaline à nos entrepôts, le Conseil exigera des comptes.",
+          "pause_after_sec": 0.6,
+          "action_note": "Cassian fait tourner calmement une Ampoule d'Ambre Noir entre ses doigts gantés de blanc."
+        },
+        {
+          "line_id": "L021",
+          "character_id": "cassian",
+          "emotion": "neutral",
+          "text": "Devancez l'Inquisition. Dès la tombée de la nuit, prenez l'atelier de Bram Orlov et extrayez tout ce qu'il sait sur le garçon. Ne laissez rien derrière vous.",
+          "pause_after_sec": 0.9,
+          "action_note": "Gros plan sur le chronomètre de poche de Cassian qui se referme dans un claquement sec. Cut sur l'Eyecatch."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC07",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "sunset",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": true,
+      "estimated_duration_sec": 100.0,
+      "summary": "Climax d'action (I2V sélectif) : entraînement synchronisé sur les toits de Gris-Val sous le ciel couchant et l'Anneau Fixe. Kaen parvient enfin à enchaîner un double écho de Rémanence avec Mina sans brûler sa propre mémoire.",
+      "dialogue_lines": [
+        {
+          "line_id": "L022",
+          "character_id": "mina",
+          "emotion": "happy",
+          "text": "Maintenant, Kaen ! Appuie-toi sur mon écho et laisse glisser l'Ampoule !",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina bondit d'un château d'eau rouillé, laissant un fantôme cinétique doré suspendu au-dessus du vide."
+        },
+        {
+          "line_id": "L023",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Deux secondes… un rythme, pas un choc !",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen prend appui sur le double de Mina, canalise proprement son Ampoule et projette une Rémanence nette qui brise une cible de fer sans voiler ses yeux."
+        },
+        {
+          "line_id": "L024",
+          "character_id": "sorai",
+          "emotion": "smirk",
+          "text": "Zéro fuite mémorielle. Il vient enfin de fermer la brèche de sa cicatrice.",
+          "pause_after_sec": 0.6,
+          "action_note": "Soraï observe le flux lumineux depuis la lucarne, esquisse un rare sourire satisfait."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC08",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "sunset",
+      "bgm_mood": "emotion",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Moment de calme au crépuscule sur le toit. Mina avoue sa peur de voir Kaen finir comme le boulanger Maren ; Kaen lui promet qu'il ne laissera jamais l'oubli lui prendre ceux qui comptent.",
+      "dialogue_lines": [
+        {
+          "line_id": "L025",
+          "character_id": "mina",
+          "emotion": "sad",
+          "text": "Quand ton œil a blanchi tout à l'heure, j'ai cru revoir le vieux Maren. Promets-moi que tu ne finiras pas comme eux.",
+          "pause_after_sec": 0.7,
+          "action_note": "Mina s'assoit au bord du toit, les jambes dans le vide face à l'Anneau Fixe rougissant."
+        },
+        {
+          "line_id": "L026",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Je n'oublierai ni Nora, ni Bram, ni toi. S'il faut détruire toutes leurs ampoules pour que ça n'arrive plus, on les brûlera jusqu'à la dernière.",
+          "pause_after_sec": 0.6,
+          "action_note": "Kaen s'assoit près de Mina et resserre les bandages de son avant-bras droit."
+        },
+        {
+          "line_id": "L027",
+          "character_id": "sorai",
+          "emotion": "neutral",
+          "text": "Ta résonance est stable pour le moment. Mais n'oublie pas : ton véritable adversaire n'est pas la fatigue, c'est ta colère.",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï tend une gourde d'eau à Kaen."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC09",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "La nuit tombe. Soraï dévoile un vieux puits de service reliant la cave de Bram aux tunnels de la Cinquième Terrasse. Le trio se prépare à rejoindre l'atelier pour récupérer Bram et monter vers la Terrasse 5.",
+      "dialogue_lines": [
+        {
+          "line_id": "L028",
+          "character_id": "sorai",
+          "emotion": "serious",
+          "text": "Les grilles d'Inertie bloquent les escaliers principaux, mais les anciens plans de maintenance indiquent un conduit de balancier juste derrière l'atelier de Bram.",
+          "pause_after_sec": 0.5,
+          "action_note": "Soraï déplie un vieux plan bleu annoté sous la lampe ambrée."
+        },
+        {
+          "line_id": "L029",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "Parfait. La relève des patrouilles passe dans dix minutes. On récupère Bram, ses ampoules de réserve, et on quitte la Sixième.",
+          "pause_after_sec": 0.4,
+          "action_note": "Kaen vérifie ses gants et range son éclat d'Ambre Noir."
+        },
+        {
+          "line_id": "L030",
+          "character_id": "mina",
+          "emotion": "determined",
+          "text": "Attendez… Vous sentez ça ? Le vent porte une odeur d'ozone brûlé… juste en direction de chez Bram !",
+          "pause_after_sec": 0.7,
+          "action_note": "Mina se fige près de la lucarne, les yeux écarquillés."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC10",
+      "act": "act_b",
+      "location_id": "bram_workshop",
+      "lighting": "night",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Dans son atelier désert, Bram relit doucement son vieux carnet de souvenirs. Les lampes vacillent, les pendules reculent brièvement, et une odeur d'ozone noir s'infiltre sous la porte.",
+      "dialogue_lines": [
+        {
+          "line_id": "L031",
+          "character_id": "bram",
+          "emotion": "sad",
+          "text": "« Elle aimait le bruit de la pluie sur les verrières… » J'ai beau relire tes mots, je n'arrive même plus à entendre ta voix.",
+          "pause_after_sec": 0.9,
+          "action_note": "Bram passe un doigt calleux sur une page jaunie de son carnet ; une marge porte une calligraphie ancienne inhabituelle."
+        },
+        {
+          "line_id": "L032",
+          "character_id": "bram",
+          "emotion": "angry",
+          "text": "Cette odeur d'Usure… Ce ne sont pas les chiens de l'Inquisition. Ce sont les Effaceurs.",
+          "pause_after_sec": 0.6,
+          "action_note": "La serrure en fer de la porte commence à rouiller et à tomber en poussière rougeâtre ; Bram saisit son fusil à Rémanence."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC11",
+      "act": "act_b",
+      "location_id": "bram_workshop",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Cliffhanger de fin d'Épisode 3 : une escouade d'Effaceurs masqués prend d'assaut l'atelier de Bram pour le faire parler. Bram ouvre le feu tandis que Kaen et Mina, sur les toits, voient l'atelier s'embraser d'éclairs rouges.",
+      "dialogue_lines": [
+        {
+          "line_id": "L033",
+          "character_id": null,
+          "emotion": "cold",
+          "text": "Bram Orlov. Où se cache le sujet Vael ? Livre-nous le souvenir de sa cachette, et tu garderas le reste de ton esprit.",
+          "pause_after_sec": 0.4,
+          "action_note": "Trois silhouettes masquées de laiton surgissent dans la fumée, leurs ampoules d'Ambre Noir luisant en rouge sombre."
+        },
+        {
+          "line_id": "L034",
+          "character_id": "bram",
+          "emotion": "angry",
+          "text": "Venez le chercher vous-mêmes, bande de charognards !",
+          "pause_after_sec": 0.5,
+          "action_note": "Bram tire une balle de Rémanence qui se dédouble en plein vol et souffle la vitrine dans une gerbe d'étincelles."
+        },
+        {
+          "line_id": "L035",
+          "character_id": "kaen",
+          "emotion": "shocked",
+          "text": "Bram !! Non !",
+          "pause_after_sec": 1.0,
+          "action_note": "Depuis les toits, Kaen sprinte à toute allure vers l'atelier en flammes tandis que les Effaceurs encerclent Bram. Cut au noir."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC12",
+      "act": "preview",
+      "location_id": "bram_workshop",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 20.0,
+      "summary": "Teaser Épisode 4 : sauvetage dans l'atelier en feu, combat aux fusils à Rémanence de Bram et découverte d'une calligraphie impériale dans son carnet tombé au sol.",
+      "dialogue_lines": [
+        {
+          "line_id": "L036",
+          "character_id": "bram",
+          "emotion": "tired",
+          "text": "Un vieil homme sans passé a parfois des secrets qui pèsent plus lourd que le plomb. Prochain épisode : Le Carnet de Cliquet.",
+          "pause_after_sec": 0.5,
+          "action_note": "Montage rapide : Kaen brisant la verrière de l'atelier, puis gros plan sur le carnet ouvert de Bram avec le sceau du Premier Cadran."
+        }
+      ]
+    }
+  ]
+}

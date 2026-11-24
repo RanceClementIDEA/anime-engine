@@ -1,0 +1,408 @@
+{
+  "episode_id": "ep01",
+  "episode_title": "Épisode 1 — 23h48 : La Nuit des Blancs",
+  "max_budget_usd": 15.5,
+  "max_i2v_ratio": 0.15,
+  "scenes": [
+    {
+      "scene_id": "SC01",
+      "act": "cold_open",
+      "location_id": "opaline_ashes",
+      "lighting": "sunset",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Flashback du cauchemar d'Opaline : la Marée Blanche avale le village figé tandis que Nora tend la main à Kaen enfant. Réveil brutal de Kaen dans le présent.",
+      "dialogue_lines": [
+        {
+          "line_id": "L001",
+          "character_id": "nora",
+          "emotion": "sad",
+          "text": "Kaen… n'oublie pas mon nom.",
+          "pause_after_sec": 1.2,
+          "action_note": "Écho déformé tandis que la Marée Blanche engloutit son visage dans un flash blanc."
+        },
+        {
+          "line_id": "L002",
+          "character_id": "kaen",
+          "emotion": "shocked",
+          "text": "Nora…",
+          "pause_after_sec": 0.8,
+          "action_note": "Cut sec sur Kaen (17 ans) qui ouvre les yeux en sursaut, sa cicatrice d'ambre brillant faiblement."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC02",
+      "act": "act_a",
+      "location_id": "lisere_morte_ruins",
+      "lighting": "day",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 100.0,
+      "summary": "Kaen et Mina courent sur les arches de la Lisière Morte au-dessus du Zéro. Mina utilise la Rémanence pour récupérer une bobine ancienne avant l'arrivée d'une langue de brume.",
+      "dialogue_lines": [
+        {
+          "line_id": "L003",
+          "character_id": "mina",
+          "emotion": "happy",
+          "text": "Trois secondes de marge ! Tu vieillis, Kaen.",
+          "pause_after_sec": 0.4,
+          "action_note": "Mina atterrit souplement sur le monte-charge rouillé, un grand sourire aux lèvres."
+        },
+        {
+          "line_id": "L004",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "C'est toi qui as cramé une demi-ampoule pour faire la maline. On n'est pas payés pour le spectacle.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen essuie la poussière blanche sur la bobine de cuivre récupérée."
+        },
+        {
+          "line_id": "L005",
+          "character_id": "mina",
+          "emotion": "determined",
+          "text": "T'as vu le rendement de cette pièce ? Ce soir, c'est pain chaud chez le vieux Maren.",
+          "pause_after_sec": 0.6,
+          "action_note": "Mina pointe les Terrasses supérieures tandis que le monte-charge s'élève."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC03",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "day",
+      "bgm_mood": "daily",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 100.0,
+      "summary": "Traversée du marché de Gris-Val. Le boulanger Maren offre deux pains chauds à Kaen devant son fils Toma, juste avant une annonce du Concordat augmentant la Dîme des Heures.",
+      "dialogue_lines": [
+        {
+          "line_id": "L006",
+          "character_id": null,
+          "emotion": "neutral",
+          "text": "Prends-les, gamin. Si tu tombes d'inanition sur la Lisière, qui ramènera des pièces à Bram ?",
+          "pause_after_sec": 0.4,
+          "action_note": "Maren (boulanger) glisse deux pains chauds dans le sac de Kaen avec un sourire chaleureux."
+        },
+        {
+          "line_id": "L007",
+          "character_id": null,
+          "emotion": "happy",
+          "text": "Papa, on ira voir les lanternes de la Terrasse cinq dimanche ?",
+          "pause_after_sec": 0.3,
+          "action_note": "Toma (8 ans) tire sur le tablier de son père."
+        },
+        {
+          "line_id": "L008",
+          "character_id": null,
+          "emotion": "gentle",
+          "text": "Promis, mon grand. Je n'oublie jamais une promesse.",
+          "pause_after_sec": 0.8,
+          "action_note": "Maren ébouriffe les cheveux de son fils tandis qu'un haut-parleur grésille au-dessus de la rue."
+        },
+        {
+          "line_id": "L009",
+          "character_id": null,
+          "emotion": "cold",
+          "text": "Rappel du Bureau de la Récolte : le quota trimestriel de la Dîme des Heures est relevé de vingt pour cent.",
+          "pause_after_sec": 0.9,
+          "action_note": "Voix métallique du haut-parleur. Les passants se figent brièvement."
+        },
+        {
+          "line_id": "L010",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "Merci, Maren. Fais gaffe avec leurs nouveaux quotas.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen lance un regard sombre vers le haut-parleur avant de reprendre sa route."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC04",
+      "act": "act_a",
+      "location_id": "bram_workshop",
+      "lighting": "day",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 115.0,
+      "summary": "Dans l'atelier d'horlogerie de Bram, une baisse de tension fait reculer toutes les horloges à 23h48. Bram ferme son vieux carnet et tente de convaincre Kaen d'oublier Opaline.",
+      "dialogue_lines": [
+        {
+          "line_id": "L011",
+          "character_id": "bram",
+          "emotion": "tired",
+          "text": "Encore une surtension de l'Anneau. Ces salopards de la Couronne tirent trop sur les condensateurs.",
+          "pause_after_sec": 0.6,
+          "action_note": "Les lampes vacillent ; toutes les horloges reculent brièvement à 23h48 avant de repartir."
+        },
+        {
+          "line_id": "L012",
+          "character_id": "kaen",
+          "emotion": "neutral",
+          "text": "Bram… t'as vu les aiguilles ? Elles sont encore revenues à vingt-trois heures quarante-huit.",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen fixe le grand cadran mural."
+        },
+        {
+          "line_id": "L013",
+          "character_id": "bram",
+          "emotion": "neutral",
+          "text": "Des mécanismes fatigués. Et arrête de traîner près des ruines d'Opaline, Kaen. Ce village n'existe plus.",
+          "pause_after_sec": 0.4,
+          "action_note": "Bram referme discrètement son carnet usé sur l'établi."
+        },
+        {
+          "line_id": "L014",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Ma sœur y était.",
+          "pause_after_sec": 0.7,
+          "action_note": "Gros plan sur les yeux gris de Kaen."
+        },
+        {
+          "line_id": "L015",
+          "character_id": "bram",
+          "emotion": "sad",
+          "text": "Tout le monde a vérifié les registres, petit. Tu étais fils unique. Ne laisse pas un fantôme te bouffer la tête.",
+          "pause_after_sec": 0.8,
+          "action_note": "Bram pose sa loupe avec un soupir lourd."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC05",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "sunset",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Un convoi blindé du Bureau de la Récolte traverse Gris-Val. Un citoyen âgé vidé de trois ans de souvenirs s'effondre sous le regard implacable de l'Inquisitrice Lyra Vance.",
+      "dialogue_lines": [
+        {
+          "line_id": "L016",
+          "character_id": "mina",
+          "emotion": "angry",
+          "text": "Deux collectes en un mois… Ils vont tous nous vider.",
+          "pause_after_sec": 0.5,
+          "action_note": "Mina serre les poings devant le chariot vitré rempli d'Ampoules d'Ambre Gris."
+        },
+        {
+          "line_id": "L017",
+          "character_id": null,
+          "emotion": "sad",
+          "text": "Je… je sais que j'avais un chien, mais je ne me souviens plus de sa couleur…",
+          "pause_after_sec": 0.9,
+          "action_note": "Un vieil homme au bandage ensanglanté sur la tempe s'effondre sur les pavés."
+        },
+        {
+          "line_id": "L018",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Tout ce qu'on oublie finit là-haut.",
+          "pause_after_sec": 0.7,
+          "action_note": "Kaen lève les yeux vers la passerelle où Lyra Vance observe la rue en silence."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC06",
+      "act": "act_a",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 75.0,
+      "summary": "Fin d'Acte A : sous la pluie nocturne, Kaen aperçoit un double reflet fugace dans une flaque avant que le cri de Toma ne déchire la ruelle de la boulangerie.",
+      "dialogue_lines": [
+        {
+          "line_id": "L019",
+          "character_id": null,
+          "emotion": "shocked",
+          "text": "Papa ! Papa, réponds-moi !",
+          "pause_after_sec": 0.6,
+          "action_note": "Cri d'enfant hors champ. Kaen lâche son sac et sprinte vers la boulangerie."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC07",
+      "act": "act_b",
+      "location_id": "gris_val_market",
+      "lighting": "night",
+      "bgm_mood": "emotion",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 95.0,
+      "summary": "Choc émotionnel : Maren est retrouvé debout, indemne, mais réduit à l'état de Blanc aux yeux laiteux, incapable de reconnaître son fils. Kaen repère le tueur sur les toits.",
+      "dialogue_lines": [
+        {
+          "line_id": "L020",
+          "character_id": null,
+          "emotion": "shocked",
+          "text": "Papa ! C'est moi, Toma ! On devait aller voir les lanternes !",
+          "pause_after_sec": 0.7,
+          "action_note": "Toma secoue désespérément la veste de son père au milieu de la boulangerie intacte."
+        },
+        {
+          "line_id": "L021",
+          "character_id": null,
+          "emotion": "neutral",
+          "text": "…Qui êtes-vous ?",
+          "pause_after_sec": 1.0,
+          "action_note": "Gros plan sur les yeux totalement blanc laiteux de Maren."
+        },
+        {
+          "line_id": "L022",
+          "character_id": "mina",
+          "emotion": "shocked",
+          "text": "Un Blanc… en une seule nuit ?! C'est impossible, il n'est même pas Séquencier !",
+          "pause_after_sec": 0.5,
+          "action_note": "Mina se fige sur le seuil, horrifiée."
+        },
+        {
+          "line_id": "L023",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Reste avec le gamin. Il est encore là.",
+          "pause_after_sec": 0.4,
+          "action_note": "Kaen repère une traînée de cendre noire et une silhouette masquée sur les toits."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC08",
+      "act": "act_b",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "tension",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 90.0,
+      "summary": "Course-poursuite dans les tunnels ferroviaires à balanciers. L'Effaceur masque de laiton utilise l'Usure pour pulvériser le rail et révèle la logique glaciale du Bureau.",
+      "dialogue_lines": [
+        {
+          "line_id": "L024",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Pourquoi lui ?! Il n'avait rien à voler !",
+          "pause_after_sec": 0.5,
+          "action_note": "Kaen se rattrape de justesse à un câble de balancier au-dessus du rail rouillé."
+        },
+        {
+          "line_id": "L025",
+          "character_id": null,
+          "emotion": "cold",
+          "text": "Un père terrifié devant son fils produit un Sédiment pur à quatre-vingts pour cent. Le Bureau n'achète pas des biens, gamin. Il récolte la douleur.",
+          "pause_after_sec": 0.7,
+          "action_note": "L'Effaceur montre l'Ampoule d'Ambre Noir pulsant d'une lueur rouge sombre à sa ceinture."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC09",
+      "act": "act_b",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 85.0,
+      "summary": "L'Effaceur domine Kaen grâce à l'Inertie et la Rémanence, puis tente de siphonner sa mémoire. La seringue d'extraction se fissure au contact de l'anomalie de Kaen.",
+      "dialogue_lines": [
+        {
+          "line_id": "L026",
+          "character_id": null,
+          "emotion": "shocked",
+          "text": "Qu'est-ce que… ? La mémoire ne se vide pas. Elle… elle déborde !",
+          "pause_after_sec": 0.5,
+          "action_note": "La seringue d'extraction éclate en étincelles dorées sur le front de Kaen."
+        },
+        {
+          "line_id": "L027",
+          "character_id": "kaen",
+          "emotion": "angry",
+          "text": "Touche pas à ce que j'ai dans la tête.",
+          "pause_after_sec": 0.4,
+          "action_note": "Kaen crache du sang, les yeux dilatés, sa cicatrice d'ambre s'embrasant."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC10",
+      "act": "act_b",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": true,
+      "estimated_duration_sec": 95.0,
+      "summary": "Climax Sakuga (I2V sélectif) : Kaen déclenche sa première Rémanence sans Ampoule, brise le masque de l'Effaceur et arrache l'Ampoule d'Ambre Noir qui se fissure dans sa paume.",
+      "dialogue_lines": [
+        {
+          "line_id": "L028",
+          "character_id": null,
+          "emotion": "shocked",
+          "text": "Imbécile ! Si tu l'absorbes brute, tu vas brûler ton propre esprit !",
+          "pause_after_sec": 0.3,
+          "action_note": "L'Effaceur recule dans l'ombre tandis que le liquide noir-doré s'infiltre dans la main de Kaen."
+        },
+        {
+          "line_id": "L029",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Alors brûle avec moi !",
+          "pause_after_sec": 0.5,
+          "action_note": "Impact frame N&B : onde de choc dorée dans le tunnel."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC11",
+      "act": "act_b",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "mystery",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 85.0,
+      "summary": "Flash interdit : Kaen voit le matricule OPALINE-00 et le visage vivant de Nora au Cœur de l'Anneau. Les projecteurs s'allument : Lyra Vance et son escouade l'encerclent.",
+      "dialogue_lines": [
+        {
+          "line_id": "L030",
+          "character_id": "kaen",
+          "emotion": "shocked",
+          "text": "…Elle est vivante.",
+          "pause_after_sec": 1.0,
+          "action_note": "Kaen retombe à genoux, fixant l'éclat de verre gravé OPALINE-00."
+        },
+        {
+          "line_id": "L031",
+          "character_id": "lyra",
+          "emotion": "cold",
+          "text": "Récupérateur de la Sixième Terrasse. Tu es en possession d'un Sédiment classé Zéro. Rends-toi… ou je t'efface ici même.",
+          "pause_after_sec": 1.2,
+          "action_note": "Lyra Vance pointe sa rapière sous les projecteurs. Gros plan final sur l'œil ambré de Kaen. Cut au noir."
+        }
+      ]
+    },
+    {
+      "scene_id": "SC12",
+      "act": "preview",
+      "location_id": "terrasse5_rail_tunnels",
+      "lighting": "night",
+      "bgm_mood": "climax",
+      "is_sakuga_priority": false,
+      "estimated_duration_sec": 20.0,
+      "summary": "Teaser rapide de l'Épisode 2 : fuite face aux lames d'air figé de Lyra et première rencontre avec Soraï Kestrel.",
+      "dialogue_lines": [
+        {
+          "line_id": "L032",
+          "character_id": "kaen",
+          "emotion": "determined",
+          "text": "Ils ont juré que ma sœur n'avait jamais existé. Ils ont menti. Prochain épisode : L'Archiviste Déserteuse.",
+          "pause_after_sec": 0.5,
+          "action_note": "Montage rapide de 4 plans dont l'apparition de Soraï ajustant ses lunettes de laiton."
+        }
+      ]
+    }
+  ]
+}

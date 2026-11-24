@@ -1,0 +1,10 @@
+{
+  "episode_id": "ep01", "scene_id": "SC12", "act": "preview", "bgm_mood": "climax", "max_budget_usd": 0.3,
+  "shots": [
+    {"shot_id":"S01","duration_sec":4.0,"render_mode":"static_pan","camera_move":"shake","location_id":"terrasse5_rail_tunnels","lighting":"night","character_ids":["lyra"],"emotion":"angry","scene_prompt":"rapid preview cut: translucent air-blade slicing concrete inches from Kaen in rail tunnel","sfx_cues":["air_slash"]},
+    {"shot_id":"S02","duration_sec":4.0,"render_mode":"parallax_2_5d","camera_move":"zoom_in","location_id":"terrasse5_rail_tunnels","lighting":"night","character_ids":["sorai"],"emotion":"serious","scene_prompt":"rapid preview cut: blue hexagonal Inertia barrier deflecting Inquisition assault","sfx_cues":["barrier_hum"]},
+    {"shot_id":"S03","duration_sec":5.0,"render_mode":"dialogue_lipsync","camera_move":"pan_right","location_id":"gris_val_market","lighting":"day","character_ids":["kaen"],"emotion":"determined","line_id":"L032","scene_prompt":"rapid preview cut: Kaen running across Gris-Val rooftops beneath morning haze"},
+    {"shot_id":"S04","duration_sec":4.0,"render_mode":"parallax_2_5d","camera_move":"zoom_in","location_id":"gris_val_market","lighting":"night","character_ids":["sorai"],"scene_prompt":"rapid preview cut: Soraï Kestrel adjusting slim brass glasses in candlelit hideout looking calmly at camera"},
+    {"shot_id":"S05","duration_sec":3.0,"render_mode":"static_pan","camera_move":"none","location_id":"terrasse2_archives","lighting":"sunset","scene_prompt":"episode 2 title card over dark horlo-punk dial: ÉPISODE 2 — L'Archiviste Déserteuse","sfx_cues":["clock_chime_end"]}
+  ]
+}

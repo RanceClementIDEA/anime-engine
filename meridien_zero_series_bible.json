@@ -1,0 +1,281 @@
+{
+  "series_title": "Méridien Zéro (Zero Shigosen)",
+  "genre": "dark_fantasy_horlopunk_thriller",
+  "aspect_ratio": "16:9",
+  "characters": [
+    {
+      "id": "kaen",
+      "name": "Kaen Vael",
+      "role": "protagonist",
+      "voice_profile": "intense_raspy_young_male_fr",
+      "visual_prompt": "17-year-old young man, messy jet-black hair, sharp dark grey eyes with faint golden fleck, thin glowing amber scar on left collarbone, worn charcoal scavenger jacket with brass clasps, fingerless dark leather gloves, bandaged right forearm",
+      "expressions": [
+        "neutral",
+        "angry",
+        "shocked",
+        "sad",
+        "determined"
+      ],
+      "accent_color_hex": "#f59e0b"
+    },
+    {
+      "id": "sorai",
+      "name": "Soraï Kestrel",
+      "role": "ally_strategist",
+      "voice_profile": "crisp_composed_female_fr",
+      "visual_prompt": "19-year-old young woman, sleek dark indigo hair tied in low ponytail, pale ice-blue eyes, slim rectangular brass glasses, tailored ivory-and-slate coat with silver geometric lapels, dark turtleneck, leather satchel with amber vials",
+      "expressions": [
+        "neutral",
+        "serious",
+        "shocked",
+        "sad",
+        "smirk"
+      ],
+      "accent_color_hex": "#38bdf8"
+    },
+    {
+      "id": "bram",
+      "name": "Bram 'Cliquet' Orlov",
+      "role": "ally_mentor",
+      "voice_profile": "gruff_warm_baritone_fr",
+      "visual_prompt": "34-year-old rugged man, short iron-grey hair with stubble, left eye covered by brass clockwork eyepatch, right eye pale faded grey, heavy brown leather watchmaker apron over rolled-sleeve shirt, mechanical forearm brace, worn pocket notebook",
+      "expressions": [
+        "neutral",
+        "smirk",
+        "angry",
+        "sad",
+        "tired"
+      ],
+      "accent_color_hex": "#d97706"
+    },
+    {
+      "id": "mina",
+      "name": "Mina Tsubaki",
+      "role": "ally_scout",
+      "voice_profile": "bright_energetic_teen_female_fr",
+      "visual_prompt": "16-year-old girl, choppy copper-auburn short hair, bright emerald eyes, brass aviator goggles resting on forehead, cropped olive utility vest, frayed crimson scarf, agile lightweight boots, dual amber-chamber wrist straps",
+      "expressions": [
+        "neutral",
+        "happy",
+        "shocked",
+        "determined",
+        "sad"
+      ],
+      "accent_color_hex": "#10b981"
+    },
+    {
+      "id": "voss",
+      "name": "Dr. Julian Voss",
+      "role": "ally_doctor",
+      "voice_profile": "calm_intellectual_mature_male_fr",
+      "visual_prompt": "42-year-old lean man, neatly combed silver-streaked brown hair, tired hazel eyes, weathered off-white physician coat over dark waistcoat, small brass loupe hanging from neck, ink-stained fingers",
+      "expressions": [
+        "neutral",
+        "sad",
+        "shocked",
+        "serious",
+        "gentle"
+      ],
+      "accent_color_hex": "#94a3b8"
+    },
+    {
+      "id": "tarek",
+      "name": "Tarek Al-Mansour",
+      "role": "ally_tactician",
+      "voice_profile": "charismatic_dry_male_fr",
+      "visual_prompt": "25-year-old athletic man, dark curly hair, warm bronze skin, sharp dark eyes, short trimmed beard, sand-colored armored trench cloak with iron shoulder guard, bandolier of acoustic canisters, confident posture",
+      "expressions": [
+        "neutral",
+        "smirk",
+        "angry",
+        "serious",
+        "shocked"
+      ],
+      "accent_color_hex": "#ea580c"
+    },
+    {
+      "id": "lyra",
+      "name": "Inquisitrice Lyra Vance",
+      "role": "ambiguous_rival",
+      "voice_profile": "cold_authoritative_female_fr",
+      "visual_prompt": "28-year-old stern woman, platinum-blonde hair in tight military bun, piercing steel-blue eyes, immaculate white-and-crimson Concordat inquisitor uniform with gold clockwork insignia, long white cape, silver rapier hilt",
+      "expressions": [
+        "neutral",
+        "angry",
+        "cold",
+        "shocked",
+        "doubt"
+      ],
+      "accent_color_hex": "#e11d48"
+    },
+    {
+      "id": "vesper",
+      "name": "Vesper 'Le Brocanteur'",
+      "role": "ambiguous_broker",
+      "voice_profile": "theatrical_shifting_male_fr",
+      "visual_prompt": "ageless slender figure, shoulder-length pale violet-silver hair, mismatched amber and milky-white eyes, high-collared midnight-plum velvet tailcoat lined with tiny glowing memory vials, porcelain half-mask tilted on temple",
+      "expressions": [
+        "neutral",
+        "smirk",
+        "amused",
+        "serious",
+        "eerie"
+      ],
+      "accent_color_hex": "#a855f7"
+    },
+    {
+      "id": "kurogane",
+      "name": "Kurogane 'Le Calque'",
+      "role": "ambiguous_swordsman",
+      "voice_profile": "quiet_monotone_low_male_fr",
+      "visual_prompt": "tall gaunt swordsman, long straight black hair framing pale expressionless face, almost completely milky-white eroded eyes, tattered matte-black haori coat over dark fitted armor, dual straight katana with amber-chamber hilts",
+      "expressions": [
+        "neutral",
+        "focused",
+        "sad",
+        "cold",
+        "shocked"
+      ],
+      "accent_color_hex": "#64748b"
+    },
+    {
+      "id": "nora",
+      "name": "Nora Vael",
+      "role": "ambiguous_core_vessel",
+      "voice_profile": "serene_soft_young_female_fr",
+      "visual_prompt": "15-year-old girl, long straight obsidian hair, luminous pale-gold eyes, serene sorrowful gaze, minimalist ceremonial alabaster white dress with fine golden meridian trim, barefoot, subtle floating golden dust motes",
+      "expressions": [
+        "neutral",
+        "sad",
+        "serene",
+        "shocked",
+        "gentle"
+      ],
+      "accent_color_hex": "#fde68a"
+    },
+    {
+      "id": "cassian",
+      "name": "Directeur Cassian Morel",
+      "role": "antagonist_s1",
+      "voice_profile": "measured_clinical_baritone_fr",
+      "visual_prompt": "45-year-old imposing man, swept-back dark hair with white temples, gaunt sharp features, calm calculating dark eyes, black-and-bronze Bureau of Harvest director coat with vertical gold dial buttons, white leather gloves, pocket chronometer",
+      "expressions": [
+        "neutral",
+        "cold",
+        "angry",
+        "smirk",
+        "resigned"
+      ],
+      "accent_color_hex": "#b91c1c"
+    }
+  ],
+  "master_locations": [
+    {
+      "id": "gris_val_market",
+      "name": "Terrasse 6 — Ruelle & Marché de Gris-Val",
+      "lighting_variants": [
+        "day",
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "crowded tiered lower-terrace anime slum street, weathered iron balconies, glowing warm amber-glass lanterns, wet cobblestones, steaming pipes, distant monumental golden ring faintly visible through hazy ash sky, no characters"
+    },
+    {
+      "id": "bram_workshop",
+      "name": "Terrasse 6 — Atelier d'Horlogerie de Bram",
+      "lighting_variants": [
+        "day",
+        "night"
+      ],
+      "background_prompt": "cozy cluttered horlo-punk watchmaker workshop interior, wooden workbenches covered in brass gears, glowing amber vials, hanging pendulums and mechanical blueprints, warm tungsten lamp lighting, dust motes in air, no characters"
+    },
+    {
+      "id": "lisere_morte_ruins",
+      "name": "Terrasse 7 — La Lisière Morte",
+      "lighting_variants": [
+        "day",
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "desolate jagged cliffside ruins overlooking an infinite abyss of silent luminous white fog, crumbling pre-arrest stone arches, pale ash drifting in wind, stark dramatic anime horizon, no characters"
+    },
+    {
+      "id": "opaline_ashes",
+      "name": "Terrasse 7 — Ruines Figées d'Opaline",
+      "lighting_variants": [
+        "day",
+        "sunset"
+      ],
+      "background_prompt": "ghostly abandoned village ruins bleached pale white, shattered clocktower, suspended raindrops frozen mid-air, surreal golden dust fractures, melancholic cel-shaded atmosphere, no characters"
+    },
+    {
+      "id": "terrasse5_rail_tunnels",
+      "name": "Terrasse 5 — Tunnels Ferroviaires à Balanciers",
+      "lighting_variants": [
+        "night"
+      ],
+      "background_prompt": "vast cavernous industrial railway tunnel, colossal brass pendulum counterweights, steel tracks glistening with dampness, flickering amber signal lights, deep dramatic shadows, no characters"
+    },
+    {
+      "id": "terrasse4_distillery",
+      "name": "Terrasse 4 — Grande Distillerie d'Ambre Gris",
+      "lighting_variants": [
+        "night",
+        "day"
+      ],
+      "background_prompt": "monumental cathedral-like industrial refinery interior, towering glass condensers filled with swirling liquid golden-grey amber memory sediment, catwalks, harsh overhead spotlights, steam plumes, no characters"
+    },
+    {
+      "id": "terrasse4_dime_clinic",
+      "name": "Terrasse 4 — Clinique de la Dîme des Heures",
+      "lighting_variants": [
+        "day",
+        "night"
+      ],
+      "background_prompt": "sterile oppressive tiled extraction hall, rows of brass-and-porcelain memory chairs connected to glass amber tubing, cold clinical fluorescent lighting mixed with faint golden glow, giant wall clock, no characters"
+    },
+    {
+      "id": "terrasse3_harvest_tower",
+      "name": "Terrasse 3 — Tour du Bureau de la Récolte",
+      "lighting_variants": [
+        "sunset",
+        "night"
+      ],
+      "background_prompt": "imposing copper-and-obsidian government skyscraper atrium with gigantic backlit mechanical dial windows, polished marble floors, sweeping stairways, dramatic god rays, no characters"
+    },
+    {
+      "id": "terrasse2_archives",
+      "name": "Terrasse 2 — Cercle d'Ivoire & Archives du Cadran",
+      "lighting_variants": [
+        "day",
+        "sunset"
+      ],
+      "background_prompt": "grand classical ivory library tower with soaring bookshelves, brass astrolabes, stained glass clockwork dome, golden afternoon shafts of light, serene majestic atmosphere, no characters"
+    },
+    {
+      "id": "terrasse1_ring_core",
+      "name": "Terrasse 1 — Couronne d'Albâtre & Cœur de l'Anneau",
+      "lighting_variants": [
+        "day",
+        "night"
+      ],
+      "background_prompt": "ethereal suspended alabaster sanctuary directly beneath a colossal glowing golden celestial ring, floating concentric brass meridians, luminous core chamber pulsing with pale amber light, awe-inspiring scale, no characters"
+    }
+  ],
+  "recurring_props": [
+    "sealed glass ampoule of glowing grey-gold Amber memory sediment",
+    "forbidden black-amber ampoule pulsing with unstable crimson light",
+    "Bram's battered leather-bound memory notebook with faded marginal calligraphy",
+    "pocket mechanical watch briefly jumping backward to 23:48",
+    "imperial brass ignition beacon buried in the ruins of Opaline",
+    "remanence chamber revolver with rotating amber cylinders"
+  ],
+  "audio_identity": {
+    "daily": "warm acoustic guitar, ticking mechanical clockwork pulse, soft Gris-Val street murmur",
+    "tension": "minimalist dark cello drone, irregular metallic pendulum clicks, distant rain and wind",
+    "mystery": "haunting celesta arpeggios, reversed tape echo textures, hollow resonant chimes",
+    "emotion": "solo melancholic piano and soft string quartet evoking fading memories",
+    "climax": "driving orchestral percussion, soaring brass, distorted electric guitar and sharp clock-chime hits",
+    "eyecatch": "3-second crisp mechanical watch wind-up followed by a resonant golden bell chime"
+  }
+}

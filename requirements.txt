@@ -1,0 +1,9 @@
+pydantic>=2.9.0
+pillow>=10.4.0
+httpx>=0.27.0
+python-dotenv>=1.0.1
+pytest>=8.3.0
+
+# Optionnels (installer au besoin) :
+# rembg>=2.0.59          # Détourage RGBA automatique sur CPU (parallax 2.5D & sprites)
+# edge-tts>=6.1.12       # TTS neural gratuit Microsoft Edge (nécessite Internet)
