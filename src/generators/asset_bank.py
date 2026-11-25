@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import hashlib
 import io
 import os
@@ -22,7 +23,7 @@ def _hex_to_rgb(hex_color: str, default: tuple[int, int, int] = (56, 189, 248)) 
 
 
 class AssetBank:
-    """Gère le Bank System idempotent : décors maîtres 2560x1440, settei et sprites RGBA."""
+    """Gère le Bank System idempotent : décors maîtres 2560x1440, settei et sprites RGBA détourés (rembg)."""
 
     def __init__(
         self,
@@ -39,8 +40,13 @@ class AssetBank:
         self.workspace_dir = workspace_dir
         self.episode_id = episode_id
         self.dry_run = dry_run
-        self.prefix = style_bible.get("prompt_templates", {}).get("positive_prefix", "japanese anime style")
+        templates = style_bible.get("prompt_templates", {})
+        self.prefix = templates.get("positive_prefix", "japanese anime style")
+        self.bg_suffix = templates.get("background_suffix", "anime background art, no characters")
+        self.char_lineart = templates.get("character_lineart", "anime production settei quality, crisp ink lineart")
+        self.acting_closeup = templates.get("acting_closeup", "sakuga character acting keyframe")
         self.cost_log_path = workspace_dir / "cost_log.jsonl"
+        self._rembg_session: Any = None
 
     def _use_placeholder(self) -> bool:
         if self.dry_run:
@@ -60,30 +66,199 @@ class AssetBank:
             self._draw_placeholder_bg(target, f"{location.name} ({lighting})", lighting)
             return target
 
-        prompt = f"{self.prefix}, anime background art, no characters, {lighting} lighting, {location.background_prompt}"
+        prompt = f"{self.prefix}, {self.bg_suffix}, {lighting} lighting, {location.background_prompt}"
         return self._call_image_api(prompt, target, size=(2560, 1440), scene_id="BANK", shot_id=f"loc_{location.id}")
 
     def ensure_character_pack(self, char: CharacterSpec, emotion: str = "neutral") -> dict[str, Path]:
-        """Garantit settei.png + 6 variantes RGBA (3 bouches x 2 états d'yeux) pour le Kuchipaku."""
+        """Garantit settei.png + 6 variantes RGBA (3 bouches x 2 états d'yeux) détourées via rembg."""
         char_dir = self.bank_dir / "characters" / char.id
         char_dir.mkdir(parents=True, exist_ok=True)
         settei_path = char_dir / "settei.png"
+
         if not (settei_path.exists() and settei_path.stat().st_size > 0):
             if self._use_placeholder():
                 self._draw_placeholder_settei(settei_path, char)
             else:
-                prompt = f"{self.prefix}, character sheet, front side back views, white background, {char.visual_prompt}"
+                prompt = (
+                    f"{self.prefix}, {self.char_lineart}, character reference sheet, "
+                    f"front side back views, solid pure white background, {char.visual_prompt}"
+                )
                 self._call_image_api(prompt, settei_path, size=(1344, 768), scene_id="BANK", shot_id=f"settei_{char.id}")
 
         pack: dict[str, Path] = {"settei": settei_path}
+
+        if self._use_placeholder():
+            for mouth in ("closed", "half", "open"):
+                for eyes in ("open", "closed"):
+                    sprite_path = char_dir / f"{emotion}_m_{mouth}_e_{eyes}.png"
+                    if not (sprite_path.exists() and sprite_path.stat().st_size > 0):
+                        self._draw_placeholder_character_sprite(sprite_path, char, emotion, mouth, eyes)
+                    pack[f"m_{mouth}_e_{eyes}"] = sprite_path
+            return pack
+
+        # Mode réel (Pollinations ou fal.ai) : génère 1 buste ancré sur le settei + détourage RGBA rembg
+        base_raw = char_dir / f"{emotion}_base_raw.png"
+        base_rgba = char_dir / f"{emotion}_base_rgba.png"
+
+        if not (base_raw.exists() and base_raw.stat().st_size > 0):
+            bust_prompt = (
+                f"{self.prefix}, {self.char_lineart}, {self.acting_closeup}, "
+                f"single character upper body bust portrait facing slightly front, {emotion} expression, "
+                f"eyes open, mouth closed, isolated on solid flat pure white background, no background elements, "
+                f"{char.visual_prompt}"
+            )
+            if os.getenv("IMAGE_API_PROVIDER", "fal").lower() == "fal" and settei_path.exists():
+                self._call_fal_kontext_or_fallback(
+                    prompt=(
+                        f"Extract this exact character from the reference sheet as a clean upper-body anime bust portrait, "
+                        f"{emotion} facial expression, eyes open, mouth closed, isolated on a solid pure white background, "
+                        f"{self.char_lineart}"
+                    ),
+                    reference_image=settei_path,
+                    target=base_raw,
+                    size=(900, 1080),
+                    scene_id="BANK",
+                    shot_id=f"bust_{char.id}_{emotion}",
+                    fallback_prompt=bust_prompt,
+                )
+            else:
+                self._call_image_api(
+                    bust_prompt,
+                    base_raw,
+                    size=(900, 1080),
+                    scene_id="BANK",
+                    shot_id=f"bust_{char.id}_{emotion}",
+                )
+
+        if not (base_rgba.exists() and base_rgba.stat().st_size > 0):
+            self._cutout_to_rgba_sprite(base_raw, base_rgba, canvas_size=(900, 1080))
+
+        sprite_mode = os.getenv("SPRITE_GENERATION_MODE", "base_rembg").lower()
+        use_kontext_variants = (
+            sprite_mode == "kontext_6"
+            and os.getenv("IMAGE_API_PROVIDER", "fal").lower() == "fal"
+            and bool(os.getenv("IMAGE_API_KEY", "").strip())
+        )
+
         for mouth in ("closed", "half", "open"):
             for eyes in ("open", "closed"):
-                key = f"{emotion}_m_{mouth}_e_{eyes}"
-                sprite_path = char_dir / f"{key}.png"
+                sprite_path = char_dir / f"{emotion}_m_{mouth}_e_{eyes}.png"
                 if not (sprite_path.exists() and sprite_path.stat().st_size > 0):
-                    self._draw_placeholder_character_sprite(sprite_path, char, emotion, mouth, eyes)
+                    if mouth == "closed" and eyes == "open":
+                        sprite_path.write_bytes(base_rgba.read_bytes())
+                    elif use_kontext_variants:
+                        var_raw = char_dir / f"{emotion}_m_{mouth}_e_{eyes}_raw.png"
+                        mouth_desc = {
+                            "closed": "mouth completely closed",
+                            "half": "mouth slightly open speaking",
+                            "open": "mouth wide open speaking",
+                        }[mouth]
+                        eyes_desc = "eyes open" if eyes == "open" else "eyes gently closed blinking"
+                        edit_prompt = (
+                            f"Keep the exact same character, pose, framing, lighting, and pure white background. "
+                            f"Change ONLY the face expression: {mouth_desc}, {eyes_desc}."
+                        )
+                        self._call_fal_kontext_or_fallback(
+                            prompt=edit_prompt,
+                            reference_image=base_raw,
+                            target=var_raw,
+                            size=(900, 1080),
+                            scene_id="BANK",
+                            shot_id=f"sprite_{char.id}_{emotion}_{mouth}_{eyes}",
+                            fallback_prompt=None,
+                        )
+                        self._cutout_to_rgba_sprite(var_raw, sprite_path, canvas_size=(900, 1080))
+                    else:
+                        self._derive_locked_variant(base_rgba, sprite_path, mouth=mouth, eyes=eyes)
+
                 pack[f"m_{mouth}_e_{eyes}"] = sprite_path
+
         return pack
+
+    def _get_rembg_session(self) -> Any:
+        if self._rembg_session is None:
+            from rembg import new_session
+
+            model_name = os.getenv("REMBG_MODEL", "isnet-anime")
+            print(f"[rembg] Chargement du modele de detourage '{model_name}'...")
+            self._rembg_session = new_session(model_name)
+        return self._rembg_session
+
+    def _cutout_to_rgba_sprite(
+        self,
+        src_path: Path,
+        out_rgba_path: Path,
+        canvas_size: tuple[int, int] = (900, 1080),
+    ) -> Path:
+        """Détoure un portrait personnage en RGBA via rembg (isnet-anime) et le cadre proprement."""
+        raw_bytes = src_path.read_bytes()
+        try:
+            from rembg import remove
+
+            session = self._get_rembg_session()
+            cutout_bytes = remove(
+                raw_bytes,
+                session=session,
+                alpha_matting=False,
+                post_process_mask=True,
+            )
+            cutout = Image.open(io.BytesIO(cutout_bytes)).convert("RGBA")
+        except ImportError:
+            print('[rembg] Package non installe -> fallback fond blanc (pip install "rembg[cpu]" onnxruntime)')
+            cutout = self._fallback_remove_white_bg(Image.open(io.BytesIO(raw_bytes)).convert("RGBA"))
+        except Exception as exc:
+            print(f"[rembg] Erreur detourage ({exc}) -> fallback fond blanc")
+            cutout = self._fallback_remove_white_bg(Image.open(io.BytesIO(raw_bytes)).convert("RGBA"))
+
+        alpha = cutout.getchannel("A").point(lambda p: 0 if p < 24 else p)
+        cutout.putalpha(alpha)
+        bbox = cutout.getbbox()
+        if bbox:
+            cutout = cutout.crop(bbox)
+
+        cw, ch = canvas_size
+        target_h = int(ch * 0.94)
+        scale = min((cw * 0.92) / max(cutout.width, 1), target_h / max(cutout.height, 1))
+        new_w = max(1, int(cutout.width * scale))
+        new_h = max(1, int(cutout.height * scale))
+        resized = cutout.resize((new_w, new_h), Image.Resampling.LANCZOS)
+
+        canvas = Image.new("RGBA", (cw, ch), (0, 0, 0, 0))
+        pos_x = (cw - new_w) // 2
+        pos_y = ch - new_h
+        canvas.paste(resized, (pos_x, pos_y), resized)
+
+        out_rgba_path.parent.mkdir(parents=True, exist_ok=True)
+        canvas.save(out_rgba_path, format="PNG")
+        return out_rgba_path
+
+    @staticmethod
+    def _fallback_remove_white_bg(img: Image.Image, threshold: int = 242) -> Image.Image:
+        """Fallback léger si rembg n'est pas installé : rend transparents les pixels blancs unis."""
+        rgba = img.convert("RGBA")
+        pixels = list(rgba.getdata())
+        cleaned = [
+            (r, g, b, 0) if (r >= threshold and g >= threshold and b >= threshold) else (r, g, b, a)
+            for (r, g, b, a) in pixels
+        ]
+        rgba.putdata(cleaned)
+        return rgba
+
+    @staticmethod
+    def _derive_locked_variant(base_rgba: Path, out_path: Path, mouth: str, eyes: str) -> None:
+        """Crée une variante verrouillée sans jitter (micro-amplitude verticale sur la parole)."""
+        with Image.open(base_rgba) as im:
+            rgba = im.convert("RGBA")
+            w, h = rgba.size
+            dy = {"closed": 0, "half": -2, "open": -4}.get(mouth, 0)
+            if eyes == "closed":
+                dy += 1
+            if dy == 0:
+                rgba.save(out_path, format="PNG")
+                return
+            shifted = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+            shifted.paste(rgba, (0, dy), rgba)
+            shifted.save(out_path, format="PNG")
 
     def ensure_shot_start_frame(
         self,
@@ -108,6 +283,62 @@ class AssetBank:
         prompt = f"{self.prefix}, {shot.scene_prompt}"
         return self._call_image_api(prompt, target, size=resolution, scene_id=scene_id, shot_id=shot.shot_id)
 
+    def _call_fal_kontext_or_fallback(
+        self,
+        prompt: str,
+        reference_image: Path,
+        target: Path,
+        size: tuple[int, int],
+        scene_id: str,
+        shot_id: str,
+        fallback_prompt: str | None,
+    ) -> Path:
+        api_key = os.getenv("IMAGE_API_KEY", "").strip()
+        model = os.getenv("FAL_KONTEXT_MODEL", "fal-ai/flux-pro/kontext")
+        b64 = base64.b64encode(reference_image.read_bytes()).decode("ascii")
+        data_uri = f"data:image/png;base64,{b64}"
+
+        headers = {
+            "Authorization": f"Key {api_key}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "prompt": prompt,
+            "image_url": data_uri,
+            "aspect_ratio": "3:4" if size[1] > size[0] else "16:9",
+            "output_format": "png",
+        }
+
+        print(f"[fal.ai kontext] {scene_id}_{shot_id} -> {model}...")
+        try:
+            with httpx.Client(timeout=120.0) as client:
+                resp = client.post(f"https://fal.run/{model}", headers=headers, json=payload)
+                resp.raise_for_status()
+                data = resp.json()
+                images = data.get("images") or []
+                if not images or not images[0].get("url"):
+                    raise RuntimeError(f"Réponse fal.ai Kontext sans image : {data}")
+                img_resp = client.get(images[0]["url"])
+                img_resp.raise_for_status()
+
+            self._save_resized_png(img_resp.content, target, size)
+            append_cost_log(
+                self.cost_log_path,
+                episode_id=self.episode_id,
+                scene_id=scene_id,
+                shot_id=shot_id,
+                category="image",
+                provider="fal",
+                model=model,
+                unit_cost_usd=ESTIMATED_IMG_USD,
+            )
+            return target
+        except Exception as exc:
+            if fallback_prompt:
+                print(f"[fal.ai kontext] Fallback sur text-to-image ({exc})")
+                return self._call_image_api(fallback_prompt, target, size=size, scene_id=scene_id, shot_id=shot_id)
+            raise
+
     def _call_image_api(
         self,
         prompt: str,
@@ -117,7 +348,7 @@ class AssetBank:
         shot_id: str,
     ) -> Path:
         provider = os.getenv("IMAGE_API_PROVIDER", "fal").lower()
-        gen_w, gen_h = (1280, 720) if size[0] >= size[1] else (720, 1280)
+        gen_w, gen_h = (1280, 720) if size[0] >= size[1] else (768, 1024)
 
         if provider == "pollinations":
             return self._call_pollinations(prompt, target, size, (gen_w, gen_h), scene_id, shot_id)
@@ -136,7 +367,7 @@ class AssetBank:
         }
         payload = {
             "prompt": prompt,
-            "image_size": {"width": 1344 if size[0] >= size[1] else 768, "height": 768 if size[0] >= size[1] else 1344},
+            "image_size": {"width": 1344 if size[0] >= size[1] else 768, "height": 768 if size[0] >= size[1] else 1024},
             "num_images": 1,
             "enable_safety_checker": False,
         }
