@@ -18,14 +18,16 @@
           "character_id": "nora",
           "emotion": "sad",
           "text": "Kaen… n'oublie pas mon nom.",
-          "pause_after_sec": 0.8
+          "pause_after_sec": 0.8,
+          "text_ja": "カエン……私の名前を、忘れないで。"
         },
         {
           "line_id": "L002",
           "character_id": "kaen",
           "emotion": "shocked",
           "text": "Nora…",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "ノラ……！"
         }
       ]
     },
@@ -43,21 +45,24 @@
           "character_id": "mina",
           "emotion": "happy",
           "text": "Trois secondes de marge ! Tu vieillis, Kaen !",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "残り三秒！カエン、腕が落ちたんじゃない？"
         },
         {
           "line_id": "L004",
           "character_id": "kaen",
           "emotion": "neutral",
           "text": "C'est toi qui as cramé une demi-ampoule pour faire la maline. On n'est pas payés pour le spectacle.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "見栄を張ってアンプルを半分も燃やしたのはお前だろ。見せ物で金をもらってるわけじゃない。"
         },
         {
           "line_id": "L005",
           "character_id": "mina",
           "emotion": "determined",
           "text": "T'as vu le rendement de cette pièce ? Ce soir, c'est pain chaud chez le vieux Maren.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "このパーツの純度、見た？今夜はマレンじいさんの焼きたてパンで決まりだね！"
         }
       ]
     },
@@ -75,35 +80,40 @@
           "character_id": null,
           "emotion": "neutral",
           "text": "Prenez ces deux pains encore chauds, les gamins. Ne discutez pas.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "ほら、まだ温かいパンを二つ持っていきな。遠慮するんじゃないよ。"
         },
         {
           "line_id": "L007",
           "character_id": null,
           "emotion": "neutral",
           "text": "Papa, on ira voir les lanternes de la Terrasse cinq dimanche ?",
-          "pause_after_sec": 0.3
+          "pause_after_sec": 0.3,
+          "text_ja": "父さん、日曜日に第五テラスのランタンを見に行ける？"
         },
         {
           "line_id": "L008",
           "character_id": null,
           "emotion": "neutral",
           "text": "Promis, mon grand. Je n'oublie jamais une promesse.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "約束だ、トマ。父さんは約束を忘れたりしないよ。"
         },
         {
           "line_id": "L009",
           "character_id": null,
           "emotion": "cold",
           "text": "Rappel du Bureau de la Récolte : le quota trimestriel de la Dîme des Heures est relevé de vingt pour cent.",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "収穫局より通達。今期の『時の十分の一税』のノルマを、二十パーセント引き上げる。"
         },
         {
           "line_id": "L010",
           "character_id": "kaen",
           "emotion": "neutral",
           "text": "Merci, Maren. Garde ton four allumé, on repasse demain.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "ありがとう、マレン。窯の火は絶やすなよ、また明日来る。"
         }
       ]
     },
@@ -121,35 +131,40 @@
           "character_id": "bram",
           "emotion": "tired",
           "text": "Vingt pièces pour la bobine. Pas une de plus, j'ai la Dîme sur le dos.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "そのコイルなら二十枚だ。一文も上乗せできん、こっちも納税で首が回らんのだ。"
         },
         {
           "line_id": "L012",
           "character_id": "kaen",
           "emotion": "neutral",
           "text": "Bram… t'as vu les aiguilles ? Elles sont encore revenues à vingt-trois heures quarante-huit.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "ブラム……針を見たか？また全部、二十三時四十八分に戻ってる。"
         },
         {
           "line_id": "L013",
           "character_id": "bram",
           "emotion": "neutral",
           "text": "Des mécanismes fatigués. Et arrête de traîner près des ruines d'Opaline, Kaen. Ce village n'existe plus.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "ただの経年劣化だ。それにカエン、オパリーヌの廃墟に近づくのはもうやめろ。あの村はもう存在しない。"
         },
         {
           "line_id": "L014",
           "character_id": "kaen",
           "emotion": "angry",
           "text": "Ma sœur y était.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "妹は、あそこにいたんだ。"
         },
         {
           "line_id": "L015",
           "character_id": "bram",
           "emotion": "sad",
           "text": "Tout le monde a vérifié les registres, petit. Tu étais fils unique. Ne laisse pas un fantôme te bouffer la tête.",
-          "pause_after_sec": 0.7
+          "pause_after_sec": 0.7,
+          "text_ja": "記録はみんな確認したんだ、坊主。お前は一人っ子だった。亡霊に頭を喰われるな。"
         }
       ]
     },
@@ -167,21 +182,24 @@
           "character_id": "mina",
           "emotion": "determined",
           "text": "Regarde-les… Ils embarquent des années entières de souvenirs comme du charbon.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "見てよ……何年分もの記憶を、まるで石炭みたいに運び去っていく。"
         },
         {
           "line_id": "L017",
           "character_id": null,
           "emotion": "sad",
           "text": "Je ne me souviens même plus… de la couleur de mon chien…",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "もう思い出せないんだ……飼っていた犬の色すら……"
         },
         {
           "line_id": "L018",
           "character_id": "kaen",
           "emotion": "determined",
           "text": "Tout ce qu'on oublie finit là-haut.",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "俺たちが忘れたものは、全部あの上へ行く。"
         }
       ]
     },
@@ -199,7 +217,8 @@
           "character_id": null,
           "emotion": "shocked",
           "text": "Papa ! Papa, réponds-moi !",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "父さん！父さん、返事をしてよ！"
         }
       ]
     },
@@ -217,28 +236,32 @@
           "character_id": null,
           "emotion": "sad",
           "text": "Papa ! C'est moi, Toma ! On devait aller voir les lanternes !",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "父さん！僕だよ、トマだ！ランタンを見に行く約束だったじゃないか！"
         },
         {
           "line_id": "L021",
           "character_id": null,
           "emotion": "neutral",
           "text": "…Qui êtes-vous ?",
-          "pause_after_sec": 0.7
+          "pause_after_sec": 0.7,
+          "text_ja": "……どちら様ですか？"
         },
         {
           "line_id": "L022",
           "character_id": "mina",
           "emotion": "shocked",
           "text": "Un Blanc… en une seule nuit ?! C'est impossible, il n'est même pas Séquencier !",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "一晩で『白紙』に……！？ありえない、あの人は調律士でもないのに！"
         },
         {
           "line_id": "L023",
           "character_id": "kaen",
           "emotion": "angry",
           "text": "Reste avec le gamin. Il est encore là.",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "その子のそばにいてくれ。奴はまだ近くにいる。"
         }
       ]
     },
@@ -256,14 +279,16 @@
           "character_id": "kaen",
           "emotion": "angry",
           "text": "Pourquoi lui ?! Il n'avait rien à voler !",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "なぜあの人なんだ！？奪うものなんて何もなかったのに！"
         },
         {
           "line_id": "L025",
           "character_id": null,
           "emotion": "cold",
           "text": "Un père terrifié devant son fils produit un Sédiment pur à quatre-vingts pour cent. Le Bureau n'achète pas des biens, gamin. Il récolte la douleur.",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "息子の前で怯える父親からは、純度八十パーセントの沈殿物が採れる。局が買うのは物ではない、小僧。苦痛を収穫しているのだ。"
         }
       ]
     },
@@ -281,14 +306,16 @@
           "character_id": null,
           "emotion": "shocked",
           "text": "Qu'est-ce que… ? La mémoire ne se vide pas. Elle… elle déborde !",
-          "pause_after_sec": 0.4
+          "pause_after_sec": 0.4,
+          "text_ja": "何だこれは……！？記憶が抜けない……いや、溢れ出しているだと！？"
         },
         {
           "line_id": "L027",
           "character_id": "kaen",
           "emotion": "angry",
           "text": "Touche pas à ce que j'ai dans la tête.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "俺の頭の中に、触れるな。"
         }
       ]
     },
@@ -307,14 +334,16 @@
           "character_id": null,
           "emotion": "shocked",
           "text": "Imbécile ! Si tu l'absorbes brute, tu vas brûler ton propre esprit !",
-          "pause_after_sec": 0.3
+          "pause_after_sec": 0.3,
+          "text_ja": "愚か者が！生のまま取り込めば、貴様自身の精神が焼き切れるぞ！"
         },
         {
           "line_id": "L029",
           "character_id": "kaen",
           "emotion": "determined",
           "text": "Alors brûle avec moi !",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "なら、俺と一緒に燃えろ！"
         }
       ]
     },
@@ -332,14 +361,16 @@
           "character_id": "kaen",
           "emotion": "shocked",
           "text": "…Elle est vivante.",
-          "pause_after_sec": 0.6
+          "pause_after_sec": 0.6,
+          "text_ja": "……生きてる。ノラは、生きている。"
         },
         {
           "line_id": "L031",
           "character_id": "lyra",
           "emotion": "cold",
           "text": "Récupérateur de la Sixième Terrasse. Tu es en possession d'un Sédiment classé Zéro. Rends-toi… ou je t'efface ici même.",
-          "pause_after_sec": 0.8
+          "pause_after_sec": 0.8,
+          "text_ja": "第六テラスの回収屋。貴様は『ゼロ指定』の沈殿物を所持している。投降しろ……さもなくば、この場で消去する。"
         }
       ]
     },
@@ -357,7 +388,8 @@
           "character_id": "kaen",
           "emotion": "determined",
           "text": "S'ils ont effacé ma sœur de l'histoire, je vais la graver à nouveau. Prochain épisode : L'Archiviste Déserteuse.",
-          "pause_after_sec": 0.5
+          "pause_after_sec": 0.5,
+          "text_ja": "歴史から妹を消したというなら、俺がもう一度刻み込んでやる。次回、『脱走した記録官』。"
         }
       ]
     }

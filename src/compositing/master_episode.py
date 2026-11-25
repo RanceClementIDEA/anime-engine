@@ -161,3 +161,25 @@ def assemble_episode_master(
     )
     concat_list.unlink(missing_ok=True)
     return output_mp4
+
+
+def burn_subtitles_vostfr(
+    master_mp4: Path,
+    ass_path: Path,
+    output_vostfr_mp4: Path,
+) -> Path:
+    """Crée la version VOSTFR avec sous-titres .ass incrustés (chemin relatif compatible Windows)."""
+    output_vostfr_mp4.parent.mkdir(parents=True, exist_ok=True)
+    rel_ass = ass_path.as_posix().replace(":", "\\:")
+    subprocess.run(
+        [
+            "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+            "-i", str(master_mp4),
+            "-vf", f"ass={rel_ass}",
+            "-c:v", "libx264", "-crf", "18", "-pix_fmt", "yuv420p",
+            "-c:a", "copy",
+            str(output_vostfr_mp4),
+        ],
+        check=True,
+    )
+    return output_vostfr_mp4

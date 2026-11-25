@@ -21,6 +21,7 @@ except ImportError:
 from src.audio.voice_engine import build_episode_voices
 from src.compositing.master_episode import (
     assemble_episode_master,
+    burn_subtitles_vostfr,
     generate_ass_subtitles,
     render_scene_master,
 )
@@ -44,11 +45,14 @@ def load_scene_storyboards(episode_dir: Path, only_scene: str | None = None) -> 
 
 def main() -> None:
     load_dotenv()
-    parser = argparse.ArgumentParser(description="anime-engine — Pipeline Voie A (Épisode Long 20 min)")
+    parser = argparse.ArgumentParser(description="anime-engine — Pipeline Voie A (VOSTFR)")
     parser.add_argument("--episode", type=str, default="ep01")
     parser.add_argument("--scene", type=str, default=None, help="Rendre uniquement une scène (ex. SC01)")
     parser.add_argument("--estimate-only", action="store_true", help="Affiche le budget sans rendu")
-    parser.add_argument("--dry-run", action="store_true", help="Animatique complète à 0 €")
+    parser.add_argument("--dry-run", action="store_true", help="Animatique visuelle à 0 €")
+    parser.add_argument("--tts-provider", type=str, default=None, choices=["local", "edge_tts", "elevenlabs"], help="Forcer le moteur vocal (ex. edge_tts pour VO japonaise 0 €)")
+    parser.add_argument("--force-voices", action="store_true", help="Régénère tous les .wav vocaux")
+    parser.add_argument("--no-burn-subs", action="store_true", help="Ne génère pas la version MP4 avec sous-titres incrustés")
     parser.add_argument("--allow-over-ratio", action="store_true", help="Autorise > 15 % d'I2V")
     parser.add_argument("--force-shot", type=str, default=None, help="Force la régénération d'un shot_id")
     args = parser.parse_args()
@@ -73,7 +77,17 @@ def main() -> None:
         episode_dir / "script.json",
         workspace_dir / "voices",
         dry_run=args.dry_run,
+        provider_override=args.tts_provider,
+        force=args.force_voices,
     )
+
+    # Auto-sync : ajuste la durée des plans dialogue pour ne jamais couper une réplique japonaise
+    for scene in scenes:
+        for shot in scene.shots:
+            if shot.line_id and shot.line_id in voices_manifest:
+                needed = round(voices_manifest[shot.line_id].duration_sec + 0.35, 2)
+                if needed > shot.duration_sec:
+                    shot.duration_sec = min(10.0, needed)
 
     resolution = (1920, 1080) if series_bible.aspect_ratio == "16:9" else (1080, 1920)
     bank = AssetBank(
@@ -91,8 +105,9 @@ def main() -> None:
         scene_clips: list[Path] = []
         for shot in scene.shots:
             clip_path = workspace_dir / "shots" / f"{scene.scene_id}_{shot.shot_id}.mp4"
-            if args.force_shot and shot.shot_id == args.force_shot and clip_path.exists():
-                clip_path.unlink()
+            if (args.force_shot and shot.shot_id == args.force_shot) or args.force_voices:
+                if clip_path.exists():
+                    clip_path.unlink()
 
             start_frame = bank.ensure_shot_start_frame(scene.scene_id, shot, resolution=resolution)
 
@@ -128,8 +143,12 @@ def main() -> None:
 
     out_ass = generate_ass_subtitles(episode_script, scenes, Path("output") / f"{args.episode}_subtitles.ass")
     out_mp4 = assemble_episode_master(rendered_scenes, Path("output") / f"{args.episode}_master.mp4")
-    print(f"Master généré : {out_mp4}")
+    print(f"Master clean  : {out_mp4}")
     print(f"Sous-titres   : {out_ass}")
+
+    if not args.no_burn_subs:
+        out_vostfr = burn_subtitles_vostfr(out_mp4, out_ass, Path("output") / f"{args.episode}_master_vostfr.mp4")
+        print(f"Master VOSTFR : {out_vostfr}")
 
 
 if __name__ == "__main__":

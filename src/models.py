@@ -56,6 +56,7 @@ class DialogueLine(BaseModel):
     character_id: str | None = None
     emotion: str = "neutral"
     text: str
+    text_ja: str = ""
     pause_after_sec: float = Field(default=0.4, ge=0.0, le=5.0)
     action_note: str = ""
 
