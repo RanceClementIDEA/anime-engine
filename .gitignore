@@ -23,3 +23,20 @@ output/*
 .DS_Store
 Thumbs.db
 .vscode/
+
+
+# Preproduction & rendus lourds
+workspace_preprod/
+bank_preprod/
+workspace/
+output/
+dataset/_extracted_keyframes/
+dataset/**/*.mp4
+dataset/**/*.webm
+dataset/**/*.mov
+dataset/**/*.mkv
+dataset/**/*.gif
+dataset/**/*.png
+dataset/**/*.jpg
+dataset/**/*.jpeg
+dataset/**/*.webp

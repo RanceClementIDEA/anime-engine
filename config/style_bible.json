@@ -1,55 +1,68 @@
 {
-  "meta": {
-    "style_name": "dark horlo-punk cel-shaded anime",
-    "generated_at": "2026-11-24T16:00:00+00:00",
+  "project": "Meridien Zero",
+  "dataset_summary": {
     "total_images_indexed": 0,
-    "categories_count": {}
-  },
-  "visual_dna": {
-    "dominant_aspect_ratio": 1.78,
-    "dominant_palette_hex": [
-      "#0f172a",
-      "#1e293b",
-      "#f59e0b",
-      "#d97706",
-      "#e2e8f0",
-      "#991b1b"
-    ],
-    "metrics": {
-      "mean_luma": 0.34,
-      "mean_contrast": 0.27,
-      "mean_saturation": 0.38
+    "total_videos_extracted": 0,
+    "metrics_source": "default_fallback (aucun decor indexe)",
+    "by_category": {
+      "decors": 0,
+      "settei": 0,
+      "props": 0,
+      "genga": 0,
+      "acting": 0,
+      "fx": 0,
+      "smears": 0,
+      "cycles": 0
     },
-    "lighting_profile": "dark_moody, high_contrast_hard_cel, muted_cinematic",
-    "top_artists": [],
-    "top_series": []
+    "videos_by_category": {
+      "decors": 0,
+      "settei": 0,
+      "props": 0,
+      "genga": 0,
+      "acting": 0,
+      "fx": 0,
+      "smears": 0,
+      "cycles": 0
+    }
   },
-  "tag_vocabulary": {
-    "global_top_tags": [
-      "cel_shading",
-      "dramatic_lighting",
-      "clockwork",
-      "amber_glow",
-      "cinematic_composition"
-    ],
-    "by_category": {}
+  "visual_metrics": {
+    "mean_luma": 0.28,
+    "mean_contrast": 0.48,
+    "mean_saturation": 0.3,
+    "lighting_tag": "dark_moody",
+    "shading_tag": "high_contrast_hard_cel",
+    "color_tag": "muted_cinematic",
+    "dominant_palette_hex": [
+      "#0F1424",
+      "#1E293B",
+      "#475569",
+      "#D97706",
+      "#F59E0B",
+      "#E2E8F0"
+    ]
+  },
+  "reference_pack": {
+    "decors": [],
+    "settei": [],
+    "props": [],
+    "genga": [],
+    "acting": [],
+    "fx": [],
+    "smears": [],
+    "cycles": []
   },
   "prompt_templates": {
     "positive_prefix": "japanese anime style, dark horlo-punk cel-shaded anime, dark_moody, high_contrast_hard_cel, muted_cinematic, clean lineart, flat cel shading, dramatic amber rim lighting",
-    "negative_prompt": "3d render, photorealistic, plastic skin, blurry, watermark, text, speech bubble, bad anatomy, deformed hands, extra limbs"
+    "background_suffix": "makoto shinkai and ufotable inspired anime background art, painterly architecture, deep atmospheric perspective, volumetric dust motes, no characters",
+    "character_lineart": "anime production settei quality, crisp variable-weight ink lineart, 2-tone hard cel shadows, expressive anime eyes, consistent proportions",
+    "acting_closeup": "sakuga character acting keyframe, subtle emotional micro-expression, cinematic shallow depth of field, dramatic key light on face",
+    "action_sakuga": "high-impact japanese sakuga animation, dynamic camera angle, subtle smear frames, glowing amber energy particles, crisp impact sparks, animated on twos",
+    "negative_prompt": "3d render, cgi, photorealistic, western cartoon, blurry, muddy colors, extra fingers, deformed anatomy, watermark, text, logo"
   },
-  "animation_rules": {
-    "target_fps": 12,
-    "delivery_fps": 24,
-    "budget_split": {
-      "local_free_ratio": 0.85,
-      "i2v_hero_ratio": 0.15
-    },
-    "post_fx": {
-      "bloom_opacity": 0.22,
-      "film_grain_strength": 6,
-      "use_impact_frames_on_hits": true
-    }
-  },
-  "claude_vision_reference_pack": {}
+  "post_fx": {
+    "bloom_strength": 0.18,
+    "grain_strength": 8,
+    "contrast_boost": 1.06,
+    "saturation_scale": 0.94
+  }
 }

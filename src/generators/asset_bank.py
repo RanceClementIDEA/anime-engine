@@ -1,9 +1,14 @@
 from __future__ import annotations
 
+import hashlib
+import io
 import os
+import time
 from pathlib import Path
 from typing import Any
+from urllib.parse import quote
 
+import httpx
 from PIL import Image, ImageDraw
 from src.models import CharacterSpec, LightingType, MasterLocation, SeriesBible, Shot
 from src.utils.cost_guard import ESTIMATED_IMG_USD, append_cost_log
@@ -37,13 +42,21 @@ class AssetBank:
         self.prefix = style_bible.get("prompt_templates", {}).get("positive_prefix", "japanese anime style")
         self.cost_log_path = workspace_dir / "cost_log.jsonl"
 
+    def _use_placeholder(self) -> bool:
+        if self.dry_run:
+            return True
+        provider = os.getenv("IMAGE_API_PROVIDER", "fal").lower()
+        if provider == "pollinations":
+            return False
+        return not bool(os.getenv("IMAGE_API_KEY", "").strip())
+
     def ensure_master_location(self, location: MasterLocation, lighting: LightingType) -> Path:
         target = self.bank_dir / "locations" / f"{location.id}_{lighting}.png"
         if target.exists() and target.stat().st_size > 0:
             return target
         target.parent.mkdir(parents=True, exist_ok=True)
 
-        if self.dry_run or not os.getenv("IMAGE_API_KEY"):
+        if self._use_placeholder():
             self._draw_placeholder_bg(target, f"{location.name} ({lighting})", lighting)
             return target
 
@@ -56,10 +69,10 @@ class AssetBank:
         char_dir.mkdir(parents=True, exist_ok=True)
         settei_path = char_dir / "settei.png"
         if not (settei_path.exists() and settei_path.stat().st_size > 0):
-            if self.dry_run or not os.getenv("IMAGE_API_KEY"):
+            if self._use_placeholder():
                 self._draw_placeholder_settei(settei_path, char)
             else:
-                prompt = f"{self.prefix}, character sheet, front side back views, {char.visual_prompt}"
+                prompt = f"{self.prefix}, character sheet, front side back views, white background, {char.visual_prompt}"
                 self._call_image_api(prompt, settei_path, size=(1344, 768), scene_id="BANK", shot_id=f"settei_{char.id}")
 
         pack: dict[str, Path] = {"settei": settei_path}
@@ -88,7 +101,7 @@ class AssetBank:
             return target
         target.parent.mkdir(parents=True, exist_ok=True)
 
-        if self.dry_run or not os.getenv("IMAGE_API_KEY"):
+        if self._use_placeholder():
             self._draw_placeholder_shot(target, scene_id, shot, resolution)
             return target
 
@@ -103,7 +116,44 @@ class AssetBank:
         scene_id: str,
         shot_id: str,
     ) -> Path:
-        provider = os.getenv("IMAGE_API_PROVIDER", "fal")
+        provider = os.getenv("IMAGE_API_PROVIDER", "fal").lower()
+        gen_w, gen_h = (1280, 720) if size[0] >= size[1] else (720, 1280)
+
+        if provider == "pollinations":
+            return self._call_pollinations(prompt, target, size, (gen_w, gen_h), scene_id, shot_id)
+
+        if provider != "fal":
+            raise ValueError(f"IMAGE_API_PROVIDER non supporté : {provider} (attendu: fal ou pollinations)")
+
+        api_key = os.getenv("IMAGE_API_KEY", "").strip()
+        if not api_key:
+            raise RuntimeError("IMAGE_API_KEY manquante dans .env")
+
+        model = os.getenv("FAL_IMAGE_MODEL", "fal-ai/flux/dev")
+        headers = {
+            "Authorization": f"Key {api_key}",
+            "Content-Type": "application/json",
+        }
+        payload = {
+            "prompt": prompt,
+            "image_size": {"width": 1344 if size[0] >= size[1] else 768, "height": 768 if size[0] >= size[1] else 1344},
+            "num_images": 1,
+            "enable_safety_checker": False,
+        }
+
+        print(f"[fal.ai image] {scene_id}_{shot_id} -> {model}...")
+        with httpx.Client(timeout=120.0) as client:
+            resp = client.post(f"https://fal.run/{model}", headers=headers, json=payload)
+            if resp.status_code >= 400:
+                raise RuntimeError(f"Erreur fal.ai ({resp.status_code}) : {resp.text[:300]}")
+            data = resp.json()
+            images = data.get("images") or []
+            if not images or not images[0].get("url"):
+                raise RuntimeError(f"Réponse fal.ai sans URL d'image : {data}")
+            img_resp = client.get(images[0]["url"])
+            img_resp.raise_for_status()
+
+        self._save_resized_png(img_resp.content, target, size)
         append_cost_log(
             self.cost_log_path,
             episode_id=self.episode_id,
@@ -111,12 +161,67 @@ class AssetBank:
             shot_id=shot_id,
             category="image",
             provider=provider,
-            model="anime-image-ref",
+            model=model,
             unit_cost_usd=ESTIMATED_IMG_USD,
         )
-        raise NotImplementedError(
-            f"Connecteur API image [{provider}] prêt à brancher via httpx (taille={size}, prompt={prompt[:60]}...)"
+        return target
+
+    def _call_pollinations(
+        self,
+        prompt: str,
+        target: Path,
+        size: tuple[int, int],
+        gen_size: tuple[int, int],
+        scene_id: str,
+        shot_id: str,
+    ) -> Path:
+        model = os.getenv("POLLINATIONS_MODEL", "flux")
+        seed = int(hashlib.md5(f"{scene_id}_{shot_id}".encode("utf-8")).hexdigest()[:8], 16) % 100000
+        encoded_prompt = quote(prompt[:900], safe="")
+        api_key = os.getenv("POLLINATIONS_API_KEY", "").strip()
+        headers = {"Authorization": f"Bearer {api_key}"} if api_key else {}
+        url = (
+            f"https://gen.pollinations.ai/image/{encoded_prompt}"
+            f"?width={gen_size[0]}&height={gen_size[1]}&seed={seed}&model={model}"
         )
+
+        print(f"[pollinations 0€] {scene_id}_{shot_id} -> {model}...")
+        last_err: Exception | None = None
+        for attempt in range(1, 4):
+            try:
+                with httpx.Client(timeout=120.0, follow_redirects=True) as client:
+                    resp = client.get(url, headers=headers)
+                    if resp.status_code in {429, 502, 503, 504}:
+                        time.sleep(3.0 * attempt)
+                        continue
+                    resp.raise_for_status()
+                    self._save_resized_png(resp.content, target, size)
+                    append_cost_log(
+                        self.cost_log_path,
+                        episode_id=self.episode_id,
+                        scene_id=scene_id,
+                        shot_id=shot_id,
+                        category="image",
+                        provider="pollinations",
+                        model=model,
+                        unit_cost_usd=0.0,
+                    )
+                    time.sleep(1.5)
+                    return target
+            except Exception as exc:
+                last_err = exc
+                time.sleep(3.0 * attempt)
+
+        raise RuntimeError(f"Échec Pollinations sur {scene_id}_{shot_id} après 3 essais : {last_err}")
+
+    @staticmethod
+    def _save_resized_png(raw_bytes: bytes, target: Path, size: tuple[int, int]) -> None:
+        with Image.open(io.BytesIO(raw_bytes)) as im:
+            rgb = im.convert("RGB")
+            if rgb.size != size:
+                rgb = rgb.resize(size, Image.Resampling.LANCZOS)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            rgb.save(target, format="PNG")
 
     @staticmethod
     def _draw_placeholder_bg(path: Path, label: str, lighting: LightingType) -> None:

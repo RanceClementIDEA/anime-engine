@@ -1,258 +1,290 @@
 from __future__ import annotations
 
 import argparse
-import colorsys
 import json
-from collections import Counter, defaultdict
-from datetime import datetime, timezone
+import math
+import subprocess
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 from PIL import Image, ImageStat
 
-IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp"}
-NOISE_TAGS = {
-    "highres", "absurdres", "animated", "video", "presumed",
-    "production_materials", "character_sheet", "sakuga", "lowres",
-}
+CATEGORIES = ("decors", "settei", "props", "genga", "acting", "fx", "smears", "cycles")
+IMAGE_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
+VIDEO_EXTS = {".mp4", ".webm", ".mov", ".mkv", ".gif"}
 
 
-def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
-    return "#{:02x}{:02x}{:02x}".format(*rgb)
+def ensure_dataset_folders(dataset_dir: Path) -> None:
+    """Crée les 8 sous-dossiers standards dans dataset/ s'ils n'existent pas."""
+    for cat in CATEGORIES:
+        d = dataset_dir / cat
+        d.mkdir(parents=True, exist_ok=True)
+        gitkeep = d / ".gitkeep"
+        if not gitkeep.exists() and not any(d.iterdir()):
+            gitkeep.write_text("", encoding="utf-8")
 
 
-def analyze_image_visuals(path: Path) -> dict[str, Any] | None:
+def _probe_duration_sec(video_path: Path) -> float:
     try:
-        with Image.open(path) as img:
-            width, height = img.size
-            rgb = img.convert("RGB")
-            thumb = rgb.copy()
-            thumb.thumbnail((160, 160))
-
-            quantized = thumb.quantize(colors=5, method=Image.Quantize.MEDIANCUT)
-            palette = quantized.getpalette() or []
-            color_counts = sorted(
-                quantized.getcolors() or [], key=lambda x: x[0], reverse=True
-            )
-
-            top_colors: list[str] = []
-            sats: list[float] = []
-            for _, idx in color_counts[:5]:
-                r, g, b = palette[idx * 3 : idx * 3 + 3]
-                top_colors.append(rgb_to_hex((r, g, b)))
-                _, s, _ = colorsys.rgb_to_hsv(r / 255.0, g / 255.0, b / 255.0)
-                sats.append(s)
-
-            gray_stat = ImageStat.Stat(thumb.convert("L"))
-            return {
-                "width": width,
-                "height": height,
-                "aspect_ratio": round(width / max(height, 1), 2),
-                "mean_luma": round(gray_stat.mean[0] / 255.0, 3),
-                "contrast_std": round(gray_stat.stddev[0] / 255.0, 3),
-                "mean_saturation": round(sum(sats) / max(len(sats), 1), 3),
-                "top_colors": top_colors,
-            }
+        res = subprocess.run(
+            [
+                "ffprobe", "-v", "error",
+                "-show_entries", "format=duration",
+                "-of", "default=noprint_wrappers=1:nokey=1",
+                str(video_path),
+            ],
+            capture_output=True,
+            text=True,
+            check=True,
+        )
+        val = float(res.stdout.strip())
+        return val if math.isfinite(val) and val > 0 else 2.0
     except Exception:
-        return None
+        return 2.0
 
 
-def load_records(dataset_dir: Path, metadata_path: Path) -> list[dict[str, Any]]:
-    records: list[dict[str, Any]] = []
-    if metadata_path.exists():
-        with metadata_path.open("r", encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if not line:
-                    continue
-                item = json.loads(line)
-                local_path = Path(item.get("local_path", ""))
-                if not local_path.is_absolute():
-                    local_path = dataset_dir / local_path
-                if local_path.exists():
-                    item["_resolved_path"] = local_path
-                    records.append(item)
-        if records:
-            return records
+def extract_video_keyframes(
+    video_path: Path,
+    out_dir: Path,
+    num_frames: int = 3,
+) -> list[Path]:
+    """Extrait num_frames keyframes d'un clip Sakugabooru (.mp4/.webm/.gif) de manière idempotente."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    expected = [out_dir / f"{video_path.stem}_kf{i + 1}.png" for i in range(num_frames)]
+    if all(p.exists() and p.stat().st_size > 0 for p in expected):
+        return expected
 
-    for path in dataset_dir.rglob("*"):
-        if path.suffix.lower() in IMAGE_EXTS and path.is_file():
-            rel_parts = path.relative_to(dataset_dir).parts
-            category = rel_parts[0] if len(rel_parts) > 1 else "uncategorized"
-            records.append(
-                {
-                    "id": path.stem,
-                    "category": category,
-                    "tags": [],
-                    "artist": "unknown",
-                    "anime_title": "unknown",
-                    "blur_score": 0.0,
-                    "_resolved_path": path,
-                }
+    duration = _probe_duration_sec(video_path)
+    ratios = [0.2, 0.5, 0.8] if num_frames == 3 else [(i + 1) / (num_frames + 1) for i in range(num_frames)]
+    extracted: list[Path] = []
+
+    for idx, ratio in enumerate(ratios):
+        target = expected[idx]
+        if target.exists() and target.stat().st_size > 0:
+            extracted.append(target)
+            continue
+        ts = max(0.0, duration * ratio)
+        try:
+            subprocess.run(
+                [
+                    "ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
+                    "-ss", f"{ts:.3f}",
+                    "-i", str(video_path),
+                    "-frames:v", "1",
+                    "-q:v", "2",
+                    str(target),
+                ],
+                check=True,
             )
-    return records
+            if target.exists() and target.stat().st_size > 0:
+                extracted.append(target)
+        except Exception:
+            continue
+
+    return extracted
 
 
-def infer_lighting_profile(luma: float, contrast: float, saturation: float) -> str:
-    tone = "dark_moody" if luma < 0.38 else ("bright_daylight" if luma > 0.62 else "balanced_midtone")
-    shading = "high_contrast_hard_cel" if contrast > 0.24 else "soft_atmospheric_cel"
-    chroma = "vivid_saturated" if saturation > 0.45 else "muted_cinematic"
-    return f"{tone}, {shading}, {chroma}"
+def _analyze_image_metrics(img_path: Path) -> tuple[float, float, float, list[tuple[int, int, int]]]:
+    """Retourne (luma_0_1, contrast_0_1, saturation_0_1, couleurs_dominantes_rgb)."""
+    with Image.open(img_path) as im:
+        rgb = im.convert("RGB")
+        thumb = rgb.copy()
+        thumb.thumbnail((320, 320))
+
+        gray = thumb.convert("L")
+        stat_l = ImageStat.Stat(gray)
+        luma = stat_l.mean[0] / 255.0
+        contrast = stat_l.stddev[0] / 128.0
+
+        hsv = thumb.convert("HSV")
+        stat_s = ImageStat.Stat(hsv.split()[1])
+        saturation = stat_s.mean[0] / 255.0
+
+        quant = thumb.quantize(colors=8, method=Image.Quantize.MEDIANCUT).convert("RGB")
+        pixels = list(quant.getdata())
+        top_colors = [c for c, _ in Counter(pixels).most_common(6)]
+
+    return luma, contrast, saturation, top_colors
+
+
+def _rgb_to_hex(rgb: tuple[int, int, int]) -> str:
+    return f"#{rgb[0]:02X}{rgb[1]:02X}{rgb[2]:02X}"
+
+
+def _classify_style_tags(luma: float, contrast: float, saturation: float) -> tuple[str, str, str]:
+    lighting = "dark_moody" if luma < 0.38 else ("balanced_cinematic" if luma < 0.62 else "bright_daylight")
+    shading = "high_contrast_hard_cel" if contrast > 0.38 else "soft_cel_shading"
+    color_mood = "muted_cinematic" if saturation < 0.35 else ("rich_cinematic" if saturation < 0.60 else "vivid_anime")
+    return lighting, shading, color_mood
 
 
 def build_style_bible(
-    dataset_dir: Path,
-    metadata_path: Path,
-    output_path: Path,
-    style_name: str,
-    sample_limit: int = 200,
-    refs_per_category: int = 3,
+    dataset_dir: Path = Path("dataset"),
+    output_path: Path = Path("config/style_bible.json"),
+    keyframes_per_video: int = 3,
 ) -> dict[str, Any]:
-    records = load_records(dataset_dir, metadata_path)
-    if not records:
-        raise FileNotFoundError(f"Aucune image trouvée dans {dataset_dir}")
+    ensure_dataset_folders(dataset_dir)
+    cache_dir = dataset_dir / "_extracted_keyframes"
 
-    global_tags: Counter[str] = Counter()
-    tags_by_cat: dict[str, Counter[str]] = defaultdict(Counter)
-    artists: Counter[str] = Counter()
-    series: Counter[str] = Counter()
-    color_counter: Counter[str] = Counter()
-    ratios: Counter[float] = Counter()
-    by_category: dict[str, list[dict[str, Any]]] = defaultdict(list)
+    category_counts: dict[str, int] = {}
+    category_videos: dict[str, int] = {}
+    reference_pack: dict[str, list[str]] = {}
+    decor_images: list[Path] = []
+    total_images = 0
+    total_videos = 0
 
+    for cat in CATEGORIES:
+        cat_dir = dataset_dir / cat
+        images: list[Path] = []
+        videos: list[Path] = []
+
+        for p in sorted(cat_dir.rglob("*")):
+            if not p.is_file() or p.name.startswith("."):
+                continue
+            ext = p.suffix.lower()
+            if ext in IMAGE_EXTS:
+                images.append(p)
+            elif ext in VIDEO_EXTS:
+                videos.append(p)
+
+        extracted_kfs: list[Path] = []
+        for v in videos:
+            extracted_kfs.extend(extract_video_keyframes(v, cache_dir / cat, num_frames=keyframes_per_video))
+
+        all_cat_images = images + extracted_kfs
+        category_counts[cat] = len(all_cat_images)
+        category_videos[cat] = len(videos)
+        total_images += len(all_cat_images)
+        total_videos += len(videos)
+
+        if all_cat_images:
+            step = max(1, len(all_cat_images) // 3)
+            picks = all_cat_images[::step][:3]
+            reference_pack[cat] = [p.as_posix() for p in picks]
+        else:
+            reference_pack[cat] = []
+
+        if cat == "decors":
+            decor_images = all_cat_images
+
+    # Calcul des métriques visuelles ISOLÉ sur dataset/decors/
     lumas: list[float] = []
     contrasts: list[float] = []
     saturations: list[float] = []
+    color_counter: Counter[tuple[int, int, int]] = Counter()
 
-    for idx, rec in enumerate(records):
-        cat = str(rec.get("category", "uncategorized")).lower()
-        by_category[cat].append(rec)
+    for img_path in decor_images:
+        try:
+            luma, contrast, sat, top_rgb = _analyze_image_metrics(img_path)
+            lumas.append(luma)
+            contrasts.append(contrast)
+            saturations.append(sat)
+            for idx, col in enumerate(top_rgb):
+                bucket = (col[0] // 16 * 16, col[1] // 16 * 16, col[2] // 16 * 16)
+                color_counter[bucket] += max(1, 6 - idx)
+        except Exception:
+            continue
 
-        for tag in rec.get("tags", []):
-            clean = str(tag).strip().lower()
-            if clean and clean not in NOISE_TAGS:
-                global_tags[clean] += 1
-                tags_by_cat[cat][clean] += 1
+    if lumas:
+        mean_luma = round(sum(lumas) / len(lumas), 3)
+        mean_contrast = round(sum(contrasts) / len(contrasts), 3)
+        mean_sat = round(sum(saturations) / len(saturations), 3)
+        palette_hex = [_rgb_to_hex(c) for c, _ in color_counter.most_common(6)]
+        metrics_source = f"decors ({len(lumas)} images)"
+    else:
+        mean_luma = 0.28
+        mean_contrast = 0.48
+        mean_sat = 0.30
+        palette_hex = ["#0F1424", "#1E293B", "#475569", "#D97706", "#F59E0B", "#E2E8F0"]
+        metrics_source = "default_fallback (aucun decor indexe)"
 
-        artist = rec.get("artist")
-        if artist and artist != "unknown":
-            artists[str(artist)] += 1
+    lighting_tag, shading_tag, color_tag = _classify_style_tags(mean_luma, mean_contrast, mean_sat)
 
-        anime = rec.get("anime_title")
-        if anime and anime != "unknown":
-            series[str(anime)] += 1
-
-        if idx < sample_limit:
-            visual = analyze_image_visuals(rec["_resolved_path"])
-            if visual:
-                rec["_visual"] = visual
-                ratios[visual["aspect_ratio"]] += 1
-                lumas.append(visual["mean_luma"])
-                contrasts.append(visual["contrast_std"])
-                saturations.append(visual["mean_saturation"])
-                color_counter.update(visual["top_colors"])
-
-    reference_pack: dict[str, list[dict[str, Any]]] = {}
-    for cat, items in by_category.items():
-        ranked = sorted(
-            items,
-            key=lambda r: (
-                float(r.get("blur_score") or 0.0),
-                int(r.get("width") or r.get("_visual", {}).get("width", 0)),
-            ),
-            reverse=True,
-        )
-        reference_pack[cat] = [
-            {
-                "id": str(r.get("id")),
-                "path": str(r["_resolved_path"]),
-                "artist": r.get("artist", "unknown"),
-                "anime_title": r.get("anime_title", "unknown"),
-                "top_tags": list(r.get("tags", []))[:8],
-            }
-            for r in ranked[:refs_per_category]
-        ]
-
-    avg_luma = round(sum(lumas) / max(len(lumas), 1), 3)
-    avg_contrast = round(sum(contrasts) / max(len(contrasts), 1), 3)
-    avg_sat = round(sum(saturations) / max(len(saturations), 1), 3)
-    lighting_profile = infer_lighting_profile(avg_luma, avg_contrast, avg_sat)
-    top_global_tags = [t for t, _ in global_tags.most_common(15)]
+    existing: dict[str, Any] = {}
+    if output_path.exists():
+        try:
+            existing = json.loads(output_path.read_text(encoding="utf-8"))
+        except Exception:
+            existing = {}
 
     style_bible: dict[str, Any] = {
-        "meta": {
-            "style_name": style_name,
-            "generated_at": datetime.now(timezone.utc).isoformat(),
-            "total_images_indexed": len(records),
-            "categories_count": {k: len(v) for k, v in by_category.items()},
+        "project": existing.get("project", "Meridien Zero"),
+        "dataset_summary": {
+            "total_images_indexed": total_images,
+            "total_videos_extracted": total_videos,
+            "metrics_source": metrics_source,
+            "by_category": category_counts,
+            "videos_by_category": category_videos,
         },
-        "visual_dna": {
-            "dominant_aspect_ratio": ratios.most_common(1)[0][0] if ratios else 1.78,
-            "dominant_palette_hex": [c for c, _ in color_counter.most_common(10)],
-            "metrics": {
-                "mean_luma": avg_luma,
-                "mean_contrast": avg_contrast,
-                "mean_saturation": avg_sat,
-            },
-            "lighting_profile": lighting_profile,
-            "top_artists": [a for a, _ in artists.most_common(10)],
-            "top_series": [s for s, _ in series.most_common(10)],
+        "visual_metrics": {
+            "mean_luma": mean_luma,
+            "mean_contrast": mean_contrast,
+            "mean_saturation": mean_sat,
+            "lighting_tag": lighting_tag,
+            "shading_tag": shading_tag,
+            "color_tag": color_tag,
+            "dominant_palette_hex": palette_hex,
         },
-        "tag_vocabulary": {
-            "global_top_tags": top_global_tags,
-            "by_category": {
-                cat: [t for t, _ in counter.most_common(12)]
-                for cat, counter in tags_by_cat.items()
-            },
-        },
+        "reference_pack": reference_pack,
         "prompt_templates": {
             "positive_prefix": (
-                f"japanese anime style, {style_name}, {lighting_profile}, "
-                "clean lineart, flat cel shading"
-                + (f", {', '.join(top_global_tags[:6])}" if top_global_tags else "")
+                f"japanese anime style, dark horlo-punk cel-shaded anime, "
+                f"{lighting_tag}, {shading_tag}, {color_tag}, "
+                f"clean lineart, flat cel shading, dramatic amber rim lighting"
+            ),
+            "background_suffix": (
+                "makoto shinkai and ufotable inspired anime background art, painterly architecture, "
+                "deep atmospheric perspective, volumetric dust motes, no characters"
+            ),
+            "character_lineart": (
+                "anime production settei quality, crisp variable-weight ink lineart, "
+                "2-tone hard cel shadows, expressive anime eyes, consistent proportions"
+            ),
+            "acting_closeup": (
+                "sakuga character acting keyframe, subtle emotional micro-expression, "
+                "cinematic shallow depth of field, dramatic key light on face"
+            ),
+            "action_sakuga": (
+                "high-impact japanese sakuga animation, dynamic camera angle, "
+                "subtle smear frames, glowing amber energy particles, crisp impact sparks, animated on twos"
             ),
             "negative_prompt": (
-                "3d render, photorealistic, plastic skin, blurry, watermark, "
-                "text, speech bubble, bad anatomy, deformed hands, extra limbs"
+                "3d render, cgi, photorealistic, western cartoon, blurry, muddy colors, "
+                "extra fingers, deformed anatomy, watermark, text, logo"
             ),
         },
-        "animation_rules": {
-            "target_fps": 12,
-            "delivery_fps": 24,
-            "budget_split": {"local_free_ratio": 0.85, "i2v_hero_ratio": 0.15},
-            "post_fx": {
-                "bloom_opacity": 0.22,
-                "film_grain_strength": 6,
-                "use_impact_frames_on_hits": True,
+        "post_fx": existing.get(
+            "post_fx",
+            {
+                "bloom_strength": 0.18,
+                "grain_strength": 8,
+                "contrast_boost": 1.06,
+                "saturation_scale": 0.94,
             },
-        },
-        "claude_vision_reference_pack": reference_pack,
+        ),
     }
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(
-        json.dumps(style_bible, indent=2, ensure_ascii=False), encoding="utf-8"
-    )
+    output_path.write_text(json.dumps(style_bible, indent=2, ensure_ascii=False), encoding="utf-8")
     return style_bible
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Analyse un dataset anime vers style_bible.json")
+    parser = argparse.ArgumentParser(description="Analyse dataset/ (8 catégories + vidéos Sakugabooru) -> config/style_bible.json")
     parser.add_argument("--dataset", type=Path, default=Path("dataset"))
-    parser.add_argument("--metadata", type=Path, default=Path("dataset/metadata.jsonl"))
-    parser.add_argument("--out", type=Path, default=Path("config/style_bible.json"))
-    parser.add_argument("--style-name", type=str, default="dark horlo-punk cel-shaded anime")
-    parser.add_argument("--sample-limit", type=int, default=200)
+    parser.add_argument("--output", type=Path, default=Path("config/style_bible.json"))
+    parser.add_argument("--keyframes", type=int, default=3, help="Nombre de keyframes extraites par vidéo")
     args = parser.parse_args()
 
-    bible = build_style_bible(
-        dataset_dir=args.dataset,
-        metadata_path=args.metadata,
-        output_path=args.out,
-        style_name=args.style_name,
-        sample_limit=args.sample_limit,
-    )
-    print(f"OK -> {args.out} ({bible['meta']['total_images_indexed']} images indexées)")
+    bible = build_style_bible(args.dataset, args.output, keyframes_per_video=args.keyframes)
+    summary = bible["dataset_summary"]
+    metrics = bible["visual_metrics"]
+    print(f"OK -> {args.output} mis a jour")
+    print(f"   Images indexees : {summary['total_images_indexed']} (dont {summary['total_videos_extracted']} videos extraites)")
+    print(f"   Source palette  : {summary['metrics_source']}")
+    print(f"   Palette         : {', '.join(metrics['dominant_palette_hex'])}")
+    print(f"   Categories      : {summary['by_category']}")
 
 
 if __name__ == "__main__":

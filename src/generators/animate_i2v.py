@@ -39,7 +39,7 @@ class SelectiveI2VClient:
         if out_clip.exists() and out_clip.stat().st_size > 0:
             return out_clip
 
-        if self.dry_run or not self.api_key:
+        if self.dry_run or not self.api_key or self.provider in {"local", "none", "pollinations"}:
             return render_local_shot(shot, start_frame, out_clip, resolution=resolution)
 
         append_cost_log(

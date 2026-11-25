@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 from pathlib import Path
 
 try:
@@ -50,6 +51,7 @@ def main() -> None:
     parser.add_argument("--scene", type=str, default=None, help="Rendre uniquement une scène (ex. SC01)")
     parser.add_argument("--estimate-only", action="store_true", help="Affiche le budget sans rendu")
     parser.add_argument("--dry-run", action="store_true", help="Animatique visuelle à 0 €")
+    parser.add_argument("--preprod", action="store_true", help="Mode preprod 0 EUR isole (Pollinations + local + edge_tts)")
     parser.add_argument("--tts-provider", type=str, default=None, choices=["local", "edge_tts", "elevenlabs"], help="Forcer le moteur vocal (ex. edge_tts pour VO japonaise 0 €)")
     parser.add_argument("--force-voices", action="store_true", help="Régénère tous les .wav vocaux")
     parser.add_argument("--no-burn-subs", action="store_true", help="Ne génère pas la version MP4 avec sous-titres incrustés")
@@ -69,10 +71,15 @@ def main() -> None:
     if args.estimate_only:
         return
 
-    if not args.dry_run:
+    if args.preprod:
+        os.environ["IMAGE_API_PROVIDER"] = "pollinations"
+        os.environ["I2V_API_PROVIDER"] = "local"
+        args.tts_provider = args.tts_provider or "edge_tts"
+
+    if not args.dry_run and not args.preprod:
         enforce_circuit_breakers(episode_script, scenes, allow_over_ratio=args.allow_over_ratio)
 
-    workspace_dir = Path("workspace") / args.episode
+    workspace_dir = Path("workspace_preprod" if args.preprod else "workspace") / args.episode
     voices_manifest = build_episode_voices(
         episode_dir / "script.json",
         workspace_dir / "voices",
@@ -93,7 +100,7 @@ def main() -> None:
     bank = AssetBank(
         style_bible=style_bible,
         series_bible=series_bible,
-        bank_dir=Path("bank"),
+        bank_dir=Path("bank_preprod" if args.preprod else "bank"),
         workspace_dir=workspace_dir,
         episode_id=args.episode,
         dry_run=args.dry_run,
@@ -147,7 +154,7 @@ def main() -> None:
     print(f"Sous-titres   : {out_ass}")
 
     if not args.no_burn_subs:
-        out_vostfr = burn_subtitles_vostfr(out_mp4, out_ass, Path("output") / f"{args.episode}_master_vostfr.mp4")
+        out_vostfr = burn_subtitles_vostfr(out_mp4, out_ass, Path("output") / (f"{args.episode}_preprod_vostfr.mp4" if args.preprod else f"{args.episode}_master_vostfr.mp4"))
         print(f"Master VOSTFR : {out_vostfr}")
 
 
